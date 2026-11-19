@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Питание до и после тренировки - Bloom Fit</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+    <style>
+        :root { --wine: #4A0E1C; --pink: #E3A6B8; --pink-light: #F2D5DE; --cream: #FAF5F0; --brown: #5C4033; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; overflow-x: hidden; }
+        body { background: var(--cream); font-family: 'Montserrat', sans-serif; color: var(--brown); line-height: 1.7; overflow-x: hidden; }
+        h1, h2, h3, .logo { font-family: 'Playfair Display', serif; color: var(--wine); font-weight: 500; }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; width: 100%; }
+        header { background: var(--cream); padding: 15px 0; border-bottom: 1px solid rgba(74, 14, 28, 0.15); position: fixed; top: 0; left: 0; right: 0; z-index: 1000; }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; max-width: 1300px; margin: 0 auto; padding: 0 24px; }
+        .logo { font-size: 28px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; }
+        .btn-back { background: transparent; border: 1px solid var(--wine); color: var(--wine); padding: 10px 20px; border-radius: 50px; font-weight: 600; font-size: 13px; }
+        .btn-back:hover { background: var(--wine); color: var(--cream); }
+        .article-hero-section { padding-top: 140px; padding-bottom: 60px; text-align: center; }
+        .article-meta { font-size: 13px; color: var(--pink); font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; }
+        .article-title { font-size: clamp(36px, 5vw, 64px); line-height: 1.1; margin-bottom: 40px; max-width: 900px; margin-left: auto; margin-right: auto; }
+        .content-grid { display: flex; flex-direction: column; gap: 80px; padding-bottom: 100px; }
+        .split-block { display: flex; align-items: center; gap: 60px; }
+        .split-block.reverse { flex-direction: row-reverse; }
+        .text-content { flex: 1; }
+        .text-content h2 { font-size: clamp(28px, 3vw, 36px); margin-bottom: 24px; line-height: 1.2; }
+        .text-content p { margin-bottom: 20px; font-size: 17px; }
+        .text-content ul { margin-bottom: 20px; padding-left: 20px; font-size: 17px; }
+        .text-content li { margin-bottom: 12px; }
+        .image-content { flex: 1; position: relative; }
+        .image-content img { width: 100%; height: 500px; object-fit: cover; border-radius: 300px 300px 0 0; border: 6px solid var(--pink-light); box-shadow: 0 20px 40px rgba(74,14,28,0.1); }
+        .full-text-block { max-width: 800px; margin: 0 auto; text-align: center; }
+        .full-text-block p { font-size: 18px; margin-bottom: 24px; }
+        .quote-block { background: var(--pink-light); padding: 40px; border-radius: 20px; margin: 40px 0; text-align: center; border: 1px solid var(--pink); }
+        .quote-block p { font-family: 'Playfair Display', serif; font-style: italic; font-size: 24px; color: var(--wine); margin: 0; }
+        .cta-box { background: var(--wine); padding: 60px 40px; border-radius: 20px; text-align: center; margin-top: 60px; color: var(--cream); }
+        .cta-box h3 { color: var(--cream); font-size: 32px; margin-bottom: 16px; }
+        .cta-box p { color: var(--pink-light); margin-bottom: 32px; font-size: 18px; }
+        .btn-main { display: inline-block; background: var(--pink); color: var(--wine); padding: 18px 36px; border-radius: 50px; font-weight: 600; text-transform: uppercase; font-size: 14px; border: none; cursor: pointer; letter-spacing: 1px; }
+        .btn-main:hover { background: var(--cream); }
+        @media (max-width: 900px) {
+            .split-block, .split-block.reverse { flex-direction: column; gap: 30px; }
+            .image-content img { height: 350px; }
+            .article-title { font-size: 36px; }
+            .header-inner { flex-direction: column; gap: 15px; }
+            .btn-back { width: 100%; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-inner">
+            <div class="logo">BLOOMFIT</div>
+            <a href="index.html" class="btn-back">← Вернуться на главную</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="article-hero-section">
+            <div class="article-meta">10 мая 2026 • Питание</div>
+            <h1 class="article-title">Питание до и после тренировки</h1>
+        </div>
+
+        <div class="content-grid">
+            <!-- Блок 1 -->
+            <div class="split-block">
+                <div class="text-content">
+                    <h2>Энергия для тела</h2>
+                    <p>То, что вы едите до и после занятия, напрямую влияет на вашу выносливость, восстановление и результаты. Как объясняет диетолог Кливлендской клиники (Cleveland Clinic), углеводы дают энергию для тренировки, а белок помогает мышцам восстанавливаться.</p>
+                    <p>За 2–4 часа до тренировки ваша цель — обеспечить организм энергией, но не перегрузить желудок. Идеальный перекус должен содержать сложные углеводы и немного белка.</p>
+                </div>
+                <div class="image-content">
+                    <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=800&q=80" alt="Полезная еда">
+                </div>
+            </div>
+
+            <!-- Блок 2 -->
+            <div class="split-block reverse">
+                <div class="text-content">
+                    <h2>Что съесть до и после?</h2>
+                    <p><b>До тренировки:</b> Овсянка с ягодами и ложкой греческого йогурта, цельнозерновой тост с авокадо и яйцом, или банан с горстью орехов.</p>
+                    <p><b>После тренировки (в течение 30–60 минут):</b> Вашим мышцам нужен белок для восстановления. Подойдет протеиновый коктейль с половиной банана, куриная грудка с киноа и зелеными овощами, или творог с ягодами и медом.</p>
+                    <p>Ограничьте жирную и очень острую пищу перед занятием — она замедляет пищеварение и может вызвать дискомфорт во время выполнения упражнений на коврике или реформере.</p>
+                </div>
+                <div class="image-content">
+                    <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=800&q=80" alt="Питание">
+                </div>
+            </div>
+
+            <!-- Блок 3 -->
+            <div class="full-text-block">
+                <div class="quote-block">
+                    <p>«Гидратация критически важна для эластичности связок и суставов».</p>
+                </div>
+                <p>Даже если вы не сильно потеете на стретчинге, вода необходима. Кливлендская клиника советует выпивать около 500 мл воды за час до тренировки и поддерживать водный баланс во время занятия.</p>
+            </div>
+
+            <!-- CTA -->
+            <div class="cta-box">
+                <h3>Нужен план питания?</h3>
+                <p>При покупке любого абонемента мы дарим бесплатную консультацию по базовому питанию от нашего нутрициолога.</p>
+                <a href="index.html#pricing" class="btn-main">Выбрать абонемент</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
