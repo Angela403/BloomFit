@@ -13,8 +13,18 @@
             --cream: #FAF5F0; --brown: #5C4033; --border: rgba(74, 14, 28, 0.15);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { background: var(--cream); font-family: 'Montserrat', sans-serif; color: var(--brown); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+        html { scroll-behavior: smooth; overflow-x: hidden; width: 100%; }
+        body {
+            background: var(--cream);
+            font-family: 'Montserrat', sans-serif;
+            color: var(--brown);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100%;
+        }
+        img { max-width: 100%; height: auto; display: block; }
         h1, h2, h3, .logo { font-family: 'Playfair Display', serif; color: var(--wine); font-weight: 500; }
         a { text-decoration: none; color: inherit; transition: 0.3s; }
 
@@ -31,26 +41,81 @@
         .hero-title .meta { font-size: 12px; text-transform: uppercase; color: var(--pink); letter-spacing: 3px; margin-bottom: 16px; display: inline-block; }
         .hero-title h1 { color: var(--cream); font-size: clamp(28px, 4vw, 52px); line-height: 1.15; text-shadow: 0 2px 20px rgba(0,0,0,0.3); }
 
-        .article-container { max-width: 780px; margin: -60px auto 80px; padding: 50px clamp(24px, 5vw, 60px); background: var(--cream); position: relative; z-index: 3; border-radius: 20px; box-shadow: 0 20px 60px rgba(74,14,28,0.08); }
-        .article-body p { font-size: 16px; line-height: 1.8; margin-bottom: 24px; color: var(--brown); }
-        .article-body h2 { font-size: clamp(22px, 3vw, 32px); margin: 36px 0 20px; line-height: 1.2; }
-        .article-body img { width: 100%; height: auto; border-radius: 12px; margin: 24px 0; box-shadow: 0 10px 30px rgba(74,14,28,0.1); }
-        .article-body ul { margin: 0 0 24px 0; padding-left: 24px; }
-        .article-body ul li { margin-bottom: 10px; font-size: 16px; line-height: 1.7; }
-        .article-body blockquote { font-family: 'Playfair Display', serif; font-style: italic; font-size: 20px; color: var(--wine); border-left: 4px solid var(--pink); padding: 16px 24px; margin: 32px 0; background: var(--pink-light); border-radius: 0 12px 12px 0; }
+        /* ===== ИСПРАВЛЕННЫЙ КОНТЕЙНЕР СТАТЬИ ===== */
+        .article-container {
+            max-width: 780px;
+            margin: 40px auto 80px;
+            padding: 50px clamp(24px, 5vw, 60px);
+            background: #fff;
+            color: var(--brown);
+            position: relative;
+            z-index: 3;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(74, 14, 28, 0.08);
+            overflow: hidden;
+        }
 
-        .article-footer { border-top: 1px solid var(--border); margin-top: 40px; padding-top: 30px; text-align: center; }
-        .article-footer p { font-size: 14px; opacity: 0.7; margin-bottom: 20px; }
-        .btn-main { background: var(--wine); color: var(--cream); padding: 14px 32px; border-radius: 50px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; font-size: 13px; display: inline-block; border: none; cursor: pointer; font-family: 'Montserrat', sans-serif; }
-        .btn-main:hover { background: var(--pink); color: var(--wine); }
+        .article-container p,
+        .article-container li,
+        .article-container span,
+        .article-container strong {
+            color: var(--brown);
+            font-size: clamp(15px, 2vw, 17px);
+            line-height: 1.8;
+        }
+        .article-container p { margin-bottom: 20px; }
 
-        footer { background: var(--wine); color: var(--cream); padding: 30px 0; text-align: center; font-size: 12px; opacity: 0.7; margin-top: 80px; }
+        .article-container h1,
+        .article-container h2,
+        .article-container h3,
+        .article-container h4 {
+            color: var(--wine);
+            margin: 32px 0 16px;
+            line-height: 1.25;
+        }
+        .article-container h1 { font-size: clamp(26px, 4vw, 40px); margin-top: 0; }
+        .article-container h2 { font-size: clamp(22px, 3vw, 30px); }
+        .article-container h3 { font-size: clamp(18px, 2.5vw, 22px); }
 
-        @media (max-width: 768px) {
-            .topbar-inner { flex-direction: column; gap: 12px; }
-            .hero { height: 45vh; min-height: 300px; }
-            .hero-title { bottom: 20px; }
-            .article-container { margin-top: -30px; padding: 30px 20px; border-radius: 12px; }
+        .article-container a {
+            color: var(--wine);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+        .article-container a:hover { color: var(--pink); }
+
+        .article-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin: 24px 0;
+        }
+        .article-container ul, .article-container ol {
+            margin: 0 0 20px 24px;
+        }
+        .article-container blockquote {
+            border-left: 4px solid var(--pink);
+            padding-left: 20px;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: var(--wine);
+            font-size: clamp(17px, 2.2vw, 21px);
+            margin: 28px 0;
+        }
+
+        .article-container [style*="color:#fff"],
+        .article-container [style*="color: #fff"],
+        .article-container [style*="color:white"],
+        .article-container [style*="color: white"] {
+            color: var(--brown) !important;
+        }
+
+        .article-footer { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; align-items: center; }
+        .article-footer .back-link { font-size: 14px; font-weight: 600; color: var(--wine); text-decoration: underline; }
+
+        @media (max-width: 640px) {
+            .topbar-inner { flex-direction: column; gap: 10px; }
+            .article-container { margin: 24px 16px 60px; padding: 30px 22px; }
         }
     </style>
 </head>
@@ -59,53 +124,63 @@
 <div class="topbar">
     <div class="topbar-inner">
         <a href="../index.html" class="logo">BLOOMFIT</a>
-        <a href="../index.html" class="btn-back">← На главную</a>
+        <a href="../index.html#blog" class="btn-back">← Назад к журналу</a>
     </div>
 </div>
 
 <div class="hero">
     <img src="../images/пилатес осанка1статья.jpg" alt="Пилатес и осанка">
     <div class="hero-title">
-        <span class="meta">Журнал · 15 мая 2026</span>
+        <span class="meta">15 мая 2026 • Журнал Bloom Fit</span>
         <h1>Как пилатес влияет на осанку?</h1>
     </div>
 </div>
 
-<div class="article-container">
-    <div class="article-body">
-        <p>Осанка — это не только эстетика. Это фундамент здоровья позвоночника, свободы дыхания и правильной работы внутренних органов. И именно пилатес является одним из самых эффективных методов коррекции осанки без боли и перегрузок.</p>
+<article class="article-container">
+    <p>Осанка — это не только «ровная спина». Это то, как распределяется нагрузка на всё тело в течение дня. Пилатес работает с осанкой мягко, но глубоко: через мелкие мышцы-стабилизаторы, дыхание и контроль движения.</p>
 
-        <h2>Почему осанка нарушается?</h2>
-        <p>Сидячий образ жизни, работа за компьютером, стресс и недостаток движения приводят к тому, что мышцы-стабилизаторы ослабевают, а одни группы мышц перенапрягаются сильнее других. Постепенно тело «запоминает» неправильное положение — плечи уходят вперёд, поясница прогибается, шея вытягивается вперёд.</p>
+    <h2>Почему осанка портится</h2>
+    <p>Сидячая работа, телефон в руке, долгие поездки в транспорте — всё это смещает центр тяжести вперёд. Мышцы кора ослабевают, плечи уходят вперёд, поясница компенсаторно прогибается. Постепенно это становится привычным положением тела — и ощущается как «норма».</p>
 
-        <img src="../images/осанка статья1.jpg" alt="Работа над осанкой на реформере">
+    <h2>Что делает пилатес</h2>
+    <p>В отличие от силовых тренировок, пилатес не «качает» крупные мышцы, а учит их правильно включать. Ключевые принципы:</p>
+    <ul>
+        <li><strong>Центрирование</strong> — активация глубоких мышц живота и таза.</li>
+        <li><strong>Контроль</strong> — каждое движение осознанно и медленное.</li>
+        <li><strong>Дыхание</strong> — грудная клетка раскрывается, рёбра двигаются свободно.</li>
+        <li><strong>Точность</strong> — лучше меньше, но правильно.</li>
+    </ul>
 
-        <h2>Что делает пилатес?</h2>
-        <p>Пилатес работает с глубокими мышцами-стабилизаторами: поперечной мышцей живота, мышцами тазового дна, межпозвонковыми мышцами, мышцами-разгибателями спины. В отличие от силовых тренировок, где цель — «качать», пилатес учит тело двигаться сбалансированно и осознанно.</p>
-        <ul>
-            <li><b>Укрепляет центр</b> — глубокие мышцы живота и спины, которые держат позвоночник.</li>
-            <li><b>Растягивает зажатые зоны</b> — грудной отдел, шею, поясницу.</li>
-            <li><b>Учит нейтральному положению таза</b> — а это база правильной осанки.</li>
-            <li><b>Развивает осознанность</b> — вы начинаете чувствовать, где именно «сваливается» тело.</li>
-        </ul>
+    <blockquote>«Хорошая осанка — это не жёсткая спина, а живая, дышащая и готовая к движению».</blockquote>
 
-        <blockquote>«Осанка — это привычка. А привычку можно изменить только через повторение и внимание к телу».</blockquote>
+    <h2>Что меняется через 8–10 занятий</h2>
+    <p>Уже после нескольких недель регулярной практики клиенты замечают:</p>
+    <ul>
+        <li>легче держать спину прямо в течение дня;</li>
+        <li>уходит напряжение в шее и плечах;</li>
+        <li>появляется ощущение «внутреннего корсета»;</li>
+        <li>уменьшается утренняя скованность в пояснице.</li>
+    </ul>
 
-        <img src="../images/пилатес статья1.jpg" alt="Тренировка по пилатесу">
+    <h2>Reformer или мат?</h2>
+    <p>Reformer даёт больше обратной связи: пружины помогают почувствовать правильное положение тела. Mat Pilates тренирует автономность — вы учитесь держать себя сами. Идеально — сочетать оба формата.</p>
 
-        <h2>Сколько нужно времени?</h2>
-        <p>Первые изменения в ощущениях появляются уже через 3–4 занятия. Устойчивый визуальный результат — через 2–3 месяца регулярных тренировок 2–3 раза в неделю. Ключевое условие — не количество, а регулярность и правильная техника.</p>
+    <h2>Что делать вне студии</h2>
+    <p>Осанка формируется 24 часа в сутки. Помимо занятий:</p>
+    <ul>
+        <li>настраивайте рабочее место: экран на уровне глаз;</li>
+        <li>каждые 40–50 минут вставайте и делайте 1–2 минуты движения;</li>
+        <li>носите сумку на обоих плечах попеременно;</li>
+        <li>спите на подушке средней высоты.</li>
+    </ul>
 
-        <p>В студии Bloom Fit все занятия Reformer Pilates и Mat Pilates построены с акцентом на осанку и нейтральное положение позвоночника. Тренер индивидуально корректирует технику и подбирает упражнения под ваши задачи.</p>
-    </div>
+    <p>В Bloom Fit осанкой занимаются и на Reformer, и на мате. Если хотите начать — запишитесь на первое занятие, и тренер подберёт формат под вас.</p>
 
     <div class="article-footer">
-        <p>Хотите попробовать? Запишитесь на первое занятие в разделе «Расписание».</p>
-        <a href="../index.html#schedule" class="btn-main">Записаться на тренировку</a>
+        <a href="../index.html#blog" class="back-link">← Другие статьи журнала</a>
+        <a href="../index.html#schedule" class="back-link">Записаться на пилатес →</a>
     </div>
-</div>
-
-<footer>© 2026 Bloom Fit. Все права защищены.</footer>
+</article>
 
 </body>
 </html>
