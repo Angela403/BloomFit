@@ -13,8 +13,18 @@
             --cream: #FAF5F0; --brown: #5C4033; --border: rgba(74, 14, 28, 0.15);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { background: var(--cream); font-family: 'Montserrat', sans-serif; color: var(--brown); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+        html { scroll-behavior: smooth; overflow-x: hidden; width: 100%; }
+        body {
+            background: var(--cream);
+            font-family: 'Montserrat', sans-serif;
+            color: var(--brown);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100%;
+        }
+        img { max-width: 100%; height: auto; display: block; }
         h1, h2, h3, .logo { font-family: 'Playfair Display', serif; color: var(--wine); font-weight: 500; }
         a { text-decoration: none; color: inherit; transition: 0.3s; }
 
@@ -31,26 +41,81 @@
         .hero-title .meta { font-size: 12px; text-transform: uppercase; color: var(--pink); letter-spacing: 3px; margin-bottom: 16px; display: inline-block; }
         .hero-title h1 { color: var(--cream); font-size: clamp(28px, 4vw, 52px); line-height: 1.15; text-shadow: 0 2px 20px rgba(0,0,0,0.3); }
 
-        .article-container { max-width: 780px; margin: -60px auto 80px; padding: 50px clamp(24px, 5vw, 60px); background: var(--cream); position: relative; z-index: 3; border-radius: 20px; box-shadow: 0 20px 60px rgba(74,14,28,0.08); }
-        .article-body p { font-size: 16px; line-height: 1.8; margin-bottom: 24px; color: var(--brown); }
-        .article-body h2 { font-size: clamp(22px, 3vw, 32px); margin: 36px 0 20px; line-height: 1.2; }
-        .article-body img { width: 100%; height: auto; border-radius: 12px; margin: 24px 0; box-shadow: 0 10px 30px rgba(74,14,28,0.1); }
-        .article-body ul { margin: 0 0 24px 0; padding-left: 24px; }
-        .article-body ul li { margin-bottom: 10px; font-size: 16px; line-height: 1.7; }
-        .article-body blockquote { font-family: 'Playfair Display', serif; font-style: italic; font-size: 20px; color: var(--wine); border-left: 4px solid var(--pink); padding: 16px 24px; margin: 32px 0; background: var(--pink-light); border-radius: 0 12px 12px 0; }
+        /* ===== ИСПРАВЛЕННЫЙ КОНТЕЙНЕР СТАТЬИ ===== */
+        .article-container {
+            max-width: 780px;
+            margin: 40px auto 80px;
+            padding: 50px clamp(24px, 5vw, 60px);
+            background: #fff;
+            color: var(--brown);
+            position: relative;
+            z-index: 3;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(74, 14, 28, 0.08);
+            overflow: hidden;
+        }
 
-        .article-footer { border-top: 1px solid var(--border); margin-top: 40px; padding-top: 30px; text-align: center; }
-        .article-footer p { font-size: 14px; opacity: 0.7; margin-bottom: 20px; }
-        .btn-main { background: var(--wine); color: var(--cream); padding: 14px 32px; border-radius: 50px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; font-size: 13px; display: inline-block; border: none; cursor: pointer; font-family: 'Montserrat', sans-serif; }
-        .btn-main:hover { background: var(--pink); color: var(--wine); }
+        .article-container p,
+        .article-container li,
+        .article-container span,
+        .article-container strong {
+            color: var(--brown);
+            font-size: clamp(15px, 2vw, 17px);
+            line-height: 1.8;
+        }
+        .article-container p { margin-bottom: 20px; }
 
-        footer { background: var(--wine); color: var(--cream); padding: 30px 0; text-align: center; font-size: 12px; opacity: 0.7; margin-top: 80px; }
+        .article-container h1,
+        .article-container h2,
+        .article-container h3,
+        .article-container h4 {
+            color: var(--wine);
+            margin: 32px 0 16px;
+            line-height: 1.25;
+        }
+        .article-container h1 { font-size: clamp(26px, 4vw, 40px); margin-top: 0; }
+        .article-container h2 { font-size: clamp(22px, 3vw, 30px); }
+        .article-container h3 { font-size: clamp(18px, 2.5vw, 22px); }
 
-        @media (max-width: 768px) {
-            .topbar-inner { flex-direction: column; gap: 12px; }
-            .hero { height: 45vh; min-height: 300px; }
-            .hero-title { bottom: 20px; }
-            .article-container { margin-top: -30px; padding: 30px 20px; border-radius: 12px; }
+        .article-container a {
+            color: var(--wine);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+        .article-container a:hover { color: var(--pink); }
+
+        .article-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin: 24px 0;
+        }
+        .article-container ul, .article-container ol {
+            margin: 0 0 20px 24px;
+        }
+        .article-container blockquote {
+            border-left: 4px solid var(--pink);
+            padding-left: 20px;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: var(--wine);
+            font-size: clamp(17px, 2.2vw, 21px);
+            margin: 28px 0;
+        }
+
+        .article-container [style*="color:#fff"],
+        .article-container [style*="color: #fff"],
+        .article-container [style*="color:white"],
+        .article-container [style*="color: white"] {
+            color: var(--brown) !important;
+        }
+
+        .article-footer { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; align-items: center; }
+        .article-footer .back-link { font-size: 14px; font-weight: 600; color: var(--wine); text-decoration: underline; }
+
+        @media (max-width: 640px) {
+            .topbar-inner { flex-direction: column; gap: 10px; }
+            .article-container { margin: 24px 16px 60px; padding: 30px 22px; }
         }
     </style>
 </head>
@@ -59,62 +124,67 @@
 <div class="topbar">
     <div class="topbar-inner">
         <a href="../index.html" class="logo">BLOOMFIT</a>
-        <a href="../index.html" class="btn-back">← На главную</a>
+        <a href="../index.html#blog" class="btn-back">← Назад к журналу</a>
     </div>
 </div>
 
 <div class="hero">
     <img src="../images/питание до и после статья2.jpg" alt="Питание до и после тренировки">
     <div class="hero-title">
-        <span class="meta">Журнал · 10 мая 2026</span>
+        <span class="meta">10 мая 2026 • Журнал Bloom Fit</span>
         <h1>Питание до и после тренировки</h1>
     </div>
 </div>
 
-<div class="article-container">
-    <div class="article-body">
-        <p>То, что вы съели за 2 часа до тренировки и в течение часа после неё, влияет на вашу энергию, восстановление и результат сильнее, чем кажется. Разбираем базовые принципы без фанатизма и жёстких диет.</p>
+<article class="article-container">
+    <p>Что съесть перед занятием, чтобы были силы, и что — после, чтобы восстановиться? Коротко и по делу: без сложных схем и жёстких ограничений.</p>
 
-        <h2>Зачем вообще думать о питании?</h2>
-        <p>Пилатес и стретчинг — не про сжигание калорий, а про качество движения и работу глубоких мышц. Но именно эти мышцы особенно чувствительны к дефициту белка, обезвоживанию и скачкам сахара в крови. Сбалансированное питание делает тренировку комфортной, а восстановление — быстрым.</p>
+    <h2>Зачем вообще думать о питании</h2>
+    <p>Пилатес, стретчинг, функциональный тренинг — это не марафоны, но телу всё равно нужно топливо. Правильный приём пищи до занятия даёт энергию, после — помогает мышцам восстановиться и не уйти в состояние «голодной усталости».</p>
 
-        <img src="../images/полезная еда статья2.jpg" alt="Полезная еда">
+    <h2>За 1,5–2 часа до тренировки</h2>
+    <p>Идеальный вариант — лёгкий приём пищи с углеводами и небольшим количеством белка:</p>
+    <ul>
+        <li>овсянка с бананом и ложкой ореховой пасты;</li>
+        <li>греческий йогурт с ягодами и гранолой;</li>
+        <li>цельнозерновой тост с авокадо и яйцом;</li>
+        <li>смузи из банана, ягод и овсянки.</li>
+    </ul>
+    <p>Главное — не переедать. Тяжёлая пища перед занятием даст тяжесть и снизит качество движения.</p>
 
-        <h2>Питание до тренировки</h2>
-        <p>Оптимально — приём пищи за 1,5–2 часа до занятия. Если времени нет, подойдёт лёгкий перекус за 30–40 минут.</p>
-        <ul>
-            <li><b>Сложные углеводы</b> — гречка, овсянка, бурый рис, цельнозерновой хлеб. Дают энергию надолго.</li>
-            <li><b>Немного белка</b> — яйцо, творог, курица, рыба. Помогает мышцам работать без распада.</li>
-            <li><b>Немного жиров</b> — авокадо, орехи, оливковое масло. Но не перегружайте — жирное переваривается долго.</li>
-            <li><b>Вода</b> — 200–300 мл за 30 минут до занятия. Обезвоживание снижает выносливость.</li>
-        </ul>
-        <p>Избегайте перед тренировкой: тяжёлой жирной еды, большого количества кофе, газировки и сладких батончиков — они дают быстрый скачок сахара и резкий спад через 20 минут.</p>
+    <h2>Если до тренировки меньше часа</h2>
+    <p>Хорошо подойдут быстрые углеводы:</p>
+    <ul>
+        <li>банан;</li>
+        <li>горсть сухофруктов;</li>
+        <li>небольшой смузи;</li>
+        <li>тост с мёдом.</li>
+    </ul>
 
-        <h2>Питание после тренировки</h2>
-        <p>В течение 30–60 минут после занятия организм особенно хорошо усваивает белок и углеводы — это «белково-углеводное окно». Пропускать его не критично, но если тренировка была интенсивной, лучше поесть в течение часа.</p>
-        <ul>
-            <li><b>Белок</b> — 20–30 г: курица, рыба, творог, яйца, растительный протеин.</li>
-            <li><b>Углеводы</b> — фрукты, рис, картофель, цельнозерновой хлеб.</li>
-            <li><b>Овощи</b> — для клетчатки и микроэлементов.</li>
-        </ul>
+    <blockquote>«Не тренируйтесь на пустой желудок, если занимаетесь дольше 45 минут — тело начнёт “съедать” собственные мышцы».</blockquote>
 
-        <img src="../images/питание статья2.jpg" alt="Сбалансированное питание">
+    <h2>После тренировки — окно восстановления</h2>
+    <p>В течение 30–60 минут после занятия стоит дать телу белок и немного углеводов. Это поможет мышцам восстановиться и снизит усталость на следующий день.</p>
+    <ul>
+        <li>омлет с овощами и цельнозерновым хлебом;</li>
+        <li>куриная грудка с рисом или киноа;</li>
+        <li>творог с ягодами и мёдом;</li>
+        <li>протеиновый смузи с бананом.</li>
+    </ul>
 
-        <blockquote>«Нет универсальной диеты для всех. Есть принципы, которые работают для большинства: регулярность, баланс и достаточное количество воды».</blockquote>
+    <h2>Вода</h2>
+    <p>Пейте до, во время и после тренировки. Ориентир — 200–300 мл за 20 минут до занятия и небольшие глотки в процессе. После — ещё 300–500 мл.</p>
 
-        <h2>Вода — недооценённый элемент</h2>
-        <p>Даже лёгкое обезвоживание (1–2% от массы тела) снижает работоспособность и координацию. Пейте воду до, во время и после тренировки. Ориентир — 30 мл на каждый килограмм веса в сутки плюс 500 мл дополнительно в дни тренировок.</p>
+    <h2>А если хочется похудеть?</h2>
+    <p>Не пропускайте приёмы пищи «для экономии калорий» — это замедляет обмен и снижает качество тренировки. Работайте с дефицитом мягко, сохраняя белок и достаточное количество энергии для движения.</p>
 
-        <p>В студии Bloom Fit после тренировки всегда можно налить воды и восстановиться в комфортной обстановке. А на первое занятие лучше приходить не голодным и не «перегруженным» — это сделает тренировку в разы приятнее.</p>
-    </div>
+    <p>Помните: питание — это не диета, а база. Без топлива тело не покажет свой максимум. Приходите на тренировку сытыми — и результат не заставит себя ждать.</p>
 
     <div class="article-footer">
-        <p>Готовы применить знания на практике? Запишитесь на тренировку!</p>
-        <a href="../index.html#schedule" class="btn-main">Записаться на тренировку</a>
+        <a href="../index.html#blog" class="back-link">← Другие статьи журнала</a>
+        <a href="../index.html#schedule" class="back-link">Записаться на тренировку →</a>
     </div>
-</div>
-
-<footer>© 2026 Bloom Fit. Все права защищены.</footer>
+</article>
 
 </body>
 </html>
