@@ -195,16 +195,7 @@
         .contacts-info h2 { margin-bottom: 24px; font-size: clamp(28px, 4vw, 48px); }
         .contacts-info p { font-size: clamp(15px, 2vw, 18px); margin-bottom: 16px; display: flex; flex-direction: column; gap: 4px; }
         .contacts-info strong { font-size: 11px; text-transform: uppercase; color: var(--pink); letter-spacing: 1px; }
-   .map-container {
-    border-radius: 300px 300px 0 0;
-    overflow: hidden;
-    height: clamp(300px, 40vw, 450px);
-    position: relative;
-    display: block;
-    border: 6px solid var(--pink);
-    /* Фолбэк: статическая карта Москвы (Тверская, 12) — Wikimedia */
-    background: var(--pink-light) url('https://maps.wikimedia.org/img/osm-intl,15,55.765,37.605,800x450.png') center/cover no-repeat;
-}
+        .map-container { border-radius: 300px 300px 0 0; overflow: hidden; height: clamp(300px, 40vw, 450px); position: relative; display: block; border: 6px solid var(--pink); }
         .map-container img { width: 100%; height: 100%; object-fit: cover; }
         .map-overlay { position: absolute; inset: 0; background: rgba(74,14,28,0.7); display: flex; align-items: center; justify-content: center; opacity: 0; transition: 0.3s; }
         .map-overlay span { color: var(--cream); border: 1px solid var(--cream); padding: 12px 24px; border-radius: 50px; font-weight: 600; text-align: center; }
@@ -541,12 +532,12 @@
                 <p><strong>Email</strong> hello@bloomfit.ru</p>
                 <p><strong>Режим работы</strong> Ежедневно с 08:00 до 22:00</p>
                 <div style="margin-top:32px;"><button class="btn-main" onclick="openModalForm()" style="width:100%;">Оставить заявку</button></div>
-          <a href="https://yandex.ru/maps/?text=Москва,+улица+Тверская,+12" target="_blank" class="map-container reveal reveal-delay-2">
-    <img src="images/Карта.jpg"
-         alt="Карта — Москва, ул. Тверская, 12"
-         onerror="this.style.display='none';">
-    <div class="map-overlay"><span>Открыть в Яндекс.Картах</span></div>
-</a>
+            </div>
+            <a href="https://yandex.ru/maps/?text=Москва,+улица+Тверская,+12" target="_blank" class="map-container reveal reveal-delay-2">
+                <img src="images/Карта.jpg" alt="Карта" onerror="this.src='https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=800&q=80'">
+                <div class="map-overlay"><span>Открыть в Яндекс.Картах</span></div>
+            </a>
+        </div>
     </section>
 
     <footer>
