@@ -13,8 +13,18 @@
             --cream: #FAF5F0; --brown: #5C4033; --border: rgba(74, 14, 28, 0.15);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { background: var(--cream); font-family: 'Montserrat', sans-serif; color: var(--brown); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+        html { scroll-behavior: smooth; overflow-x: hidden; width: 100%; }
+        body {
+            background: var(--cream);
+            font-family: 'Montserrat', sans-serif;
+            color: var(--brown);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100%;
+        }
+        img { max-width: 100%; height: auto; display: block; }
         h1, h2, h3, .logo { font-family: 'Playfair Display', serif; color: var(--wine); font-weight: 500; }
         a { text-decoration: none; color: inherit; transition: 0.3s; }
 
@@ -31,26 +41,82 @@
         .hero-title .meta { font-size: 12px; text-transform: uppercase; color: var(--pink); letter-spacing: 3px; margin-bottom: 16px; display: inline-block; }
         .hero-title h1 { color: var(--cream); font-size: clamp(28px, 4vw, 52px); line-height: 1.15; text-shadow: 0 2px 20px rgba(0,0,0,0.3); }
 
-        .article-container { max-width: 780px; margin: -60px auto 80px; padding: 50px clamp(24px, 5vw, 60px); background: var(--cream); position: relative; z-index: 3; border-radius: 20px; box-shadow: 0 20px 60px rgba(74,14,28,0.08); }
-        .article-body p { font-size: 16px; line-height: 1.8; margin-bottom: 24px; color: var(--brown); }
-        .article-body h2 { font-size: clamp(22px, 3vw, 32px); margin: 36px 0 20px; line-height: 1.2; }
-        .article-body img { width: 100%; height: auto; border-radius: 12px; margin: 24px 0; box-shadow: 0 10px 30px rgba(74,14,28,0.1); }
-        .article-body ul { margin: 0 0 24px 0; padding-left: 24px; }
-        .article-body ul li { margin-bottom: 10px; font-size: 16px; line-height: 1.7; }
-        .article-body blockquote { font-family: 'Playfair Display', serif; font-style: italic; font-size: 20px; color: var(--wine); border-left: 4px solid var(--pink); padding: 16px 24px; margin: 32px 0; background: var(--pink-light); border-radius: 0 12px 12px 0; }
+        /* ===== ИСПРАВЛЕННЫЙ КОНТЕЙНЕР СТАТЬИ ===== */
+        .article-container {
+            max-width: 780px;
+            margin: 40px auto 80px;           /* было -60px — убираем наезд на hero */
+            padding: 50px clamp(24px, 5vw, 60px);
+            background: #fff;                  /* явный белый фон */
+            color: var(--brown);               /* явный цвет текста */
+            position: relative;
+            z-index: 3;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(74, 14, 28, 0.08);
+            overflow: hidden;
+        }
 
-        .article-footer { border-top: 1px solid var(--border); margin-top: 40px; padding-top: 30px; text-align: center; }
-        .article-footer p { font-size: 14px; opacity: 0.7; margin-bottom: 20px; }
-        .btn-main { background: var(--wine); color: var(--cream); padding: 14px 32px; border-radius: 50px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; font-size: 13px; display: inline-block; border: none; cursor: pointer; font-family: 'Montserrat', sans-serif; }
-        .btn-main:hover { background: var(--pink); color: var(--wine); }
+        .article-container p,
+        .article-container li,
+        .article-container span,
+        .article-container strong {
+            color: var(--brown);
+            font-size: clamp(15px, 2vw, 17px);
+            line-height: 1.8;
+        }
+        .article-container p { margin-bottom: 20px; }
 
-        footer { background: var(--wine); color: var(--cream); padding: 30px 0; text-align: center; font-size: 12px; opacity: 0.7; margin-top: 80px; }
+        .article-container h1,
+        .article-container h2,
+        .article-container h3,
+        .article-container h4 {
+            color: var(--wine);
+            margin: 32px 0 16px;
+            line-height: 1.25;
+        }
+        .article-container h1 { font-size: clamp(26px, 4vw, 40px); margin-top: 0; }
+        .article-container h2 { font-size: clamp(22px, 3vw, 30px); }
+        .article-container h3 { font-size: clamp(18px, 2.5vw, 22px); }
 
-        @media (max-width: 768px) {
-            .topbar-inner { flex-direction: column; gap: 12px; }
-            .hero { height: 45vh; min-height: 300px; }
-            .hero-title { bottom: 20px; }
-            .article-container { margin-top: -30px; padding: 30px 20px; border-radius: 12px; }
+        .article-container a {
+            color: var(--wine);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+        .article-container a:hover { color: var(--pink); }
+
+        .article-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin: 24px 0;
+        }
+        .article-container ul, .article-container ol {
+            margin: 0 0 20px 24px;
+        }
+        .article-container blockquote {
+            border-left: 4px solid var(--pink);
+            padding-left: 20px;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: var(--wine);
+            font-size: clamp(17px, 2.2vw, 21px);
+            margin: 28px 0;
+        }
+
+        /* Аварийный фикс: если где-то остался белый текст — принудительно перекрашиваем */
+        .article-container [style*="color:#fff"],
+        .article-container [style*="color: #fff"],
+        .article-container [style*="color:white"],
+        .article-container [style*="color: white"] {
+            color: var(--brown) !important;
+        }
+
+        .article-footer { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; align-items: center; }
+        .article-footer .back-link { font-size: 14px; font-weight: 600; color: var(--wine); text-decoration: underline; }
+
+        @media (max-width: 640px) {
+            .topbar-inner { flex-direction: column; gap: 10px; }
+            .article-container { margin: 24px 16px 60px; padding: 30px 22px; }
         }
     </style>
 </head>
@@ -59,68 +125,58 @@
 <div class="topbar">
     <div class="topbar-inner">
         <a href="../index.html" class="logo">BLOOMFIT</a>
-        <a href="../index.html" class="btn-back">← На главную</a>
+        <a href="../index.html#blog" class="btn-back">← Назад к журналу</a>
     </div>
 </div>
 
 <div class="hero">
     <img src="../images/стретчинг статья3.jpg" alt="Стретчинг">
     <div class="hero-title">
-        <span class="meta">Журнал · 5 мая 2026</span>
+        <span class="meta">5 мая 2026 • Журнал Bloom Fit</span>
         <h1>Стретчинг: польза или миф?</h1>
     </div>
 </div>
 
-<div class="article-container">
-    <div class="article-body">
-        <p>Стретчинг — одна из самых неоднозначных практик в фитнесе. Одни считают его обязательным элементом каждой тренировки, другие утверждают, что растяжка перед нагрузкой только вредит. Разбираемся, где правда.</p>
+<article class="article-container">
+    <p>Стретчинг — одна из самых обсуждаемых практик в мире фитнеса. Кто-то называет его обязательным элементом тренировки, кто-то — бесполезной тратой времени. Разберёмся, где правда.</p>
 
-        <h2>Что такое стретчинг на самом деле</h2>
-        <p>Стретчинг — это не «сесть на шпагат». Это система упражнений на удлинение мышц и фасций, улучшение подвижности суставов и снятие мышечных зажимов. В студии Bloom Fit стретчинг — отдельное направление с акцентом на мягкое, осознанное растяжение без боли.</p>
+    <h2>Что такое стретчинг на самом деле</h2>
+    <p>Стретчинг — это система упражнений на растяжение мышц и связок. Он улучшает гибкость, помогает снимать мышечные зажимы, ускоряет восстановление после нагрузок и положительно влияет на осанку.</p>
 
-        <img src="../images/растяжка статья3.jpg" alt="Растяжка">
+    <h2>Основные виды</h2>
+    <ul>
+        <li><strong>Статический</strong> — фиксация положения на 20–60 секунд.</li>
+        <li><strong>Динамический</strong> — плавные контролируемые движения.</li>
+        <li><strong>Баллистический</strong> — пружинящие движения (требует осторожности).</li>
+        <li><strong>Миофасциальный</strong> — работа с фасцией с помощью ролла.</li>
+    </ul>
 
-        <h2>Виды стретчинга</h2>
-        <ul>
-            <li><b>Статический</b> — удержание позы 20–60 секунд. Классика, безопасный вариант для начинающих.</li>
-            <li><b>Динамический</b> — контролируемые махи и движения. Хорош в разминке.</li>
-            <li><b>Миофасциальный релиз</b> — работа с фасциями через роллы и мячики. Снимает зажимы глубоко.</li>
-            <li><b>PNF (контракт-релакс)</b> — напрягли мышцу, расслабили, растянули. Для опытных.</li>
-        </ul>
+    <blockquote>«Гибкое тело — это не про шпагат. Это про свободу движения и отсутствие боли по утрам».</blockquote>
 
-        <h2>Польза — подтверждена</h2>
-        <p>Исследования показывают, что регулярный стретчинг:</p>
-        <ul>
-            <li>улучшает подвижность суставов и амплитуду движений;</li>
-            <li>снижает риск травм при условии правильной техники;</li>
-            <li>уменьшает мышечную болезненность после тренировок;</li>
-            <li>снижает уровень стресса и улучшает качество сна;</li>
-            <li>помогает при сидячей работе — снимает зажимы шеи и поясницы.</li>
-        </ul>
+    <h2>Польза, подтверждённая исследованиями</h2>
+    <p>Регулярный стретчинг:</p>
+    <ul>
+        <li>улучшает амплитуду движений;</li>
+        <li>снижает риск травм при условии комплексного подхода;</li>
+        <li>помогает бороться с сидячим образом жизни;</li>
+        <li>улучшает качество сна и снижает уровень стресса.</li>
+    </ul>
 
-        <h2>Миф: «Растягиваться перед тренировкой обязательно»</h2>
-        <p>Долгий статический стретчинг перед силовой или интенсивной тренировкой действительно может снизить силу мышц на 5–10%. Перед занятием лучше делать <b>динамическую разминку</b> — махи, круги, контролируемые движения. А статический стретчинг оставить на конец занятия или отдельный день.</p>
+    <h2>Мифы о стретчинге</h2>
+    <p><strong>Миф 1.</strong> «Растягиваться нужно до боли». На самом деле боль — сигнал остановиться. Работаем в комфортном диапазоне.</p>
+    <p><strong>Миф 2.</strong> «Стретчинг заменяет силовую тренировку». Нет — это дополнение, а не замена.</p>
+    <p><strong>Миф 3.</strong> «Чем дольше, тем лучше». 10–15 минут в конце тренировки достаточно для большинства людей.</p>
 
-        <blockquote>«Растяжка — это не больно. Если больно — вы делаете что-то не так».</blockquote>
+    <h2>Как включить стретчинг в жизнь</h2>
+    <p>Начните с 10 минут в день. Уделите внимание тем зонам, которые зажаты: шея, плечи, поясница, задняя поверхность бедра. Идеально — после тренировки или перед сном.</p>
 
-        <img src="../images/йога статья3.jpg" alt="Йога и стретчинг">
-
-        <h2>Миф: «Без боли нет результата»</h2>
-        <p>Боль — сигнал тела о том, что нагрузка чрезмерна. Настоящий стретчинг работает на грани приятного натяжения, но не через боль. Регулярность важнее интенсивности: 10 минут каждый день дадут больше, чем 1 час раз в неделю через силу.</p>
-
-        <h2>Кому особенно нужен стретчинг</h2>
-        <p>Всем, кто много сидит, мало двигается, работает за компьютером, испытывает стресс или занимается силовыми тренировками. В студии Bloom Fit занятия стретчингом сочетаются с дыхательными практиками и мягкой работой с фасциями — это делает эффект глубже.</p>
-
-        <p>Если вы никогда не занимались стретчингом — начните с групповых занятий для начинающих. Тренер покажет базовые позы и объяснит, как правильно дышать и чувствовать своё тело.</p>
-    </div>
+    <p>В Bloom Fit стретчинг — отдельное направление в расписании. Приходите на пробное занятие и почувствуйте разницу.</p>
 
     <div class="article-footer">
-        <p>Хотите попробовать мягкий стретчинг? Запишитесь на занятие.</p>
-        <a href="../index.html#schedule" class="btn-main">Записаться на тренировку</a>
+        <a href="../index.html#blog" class="back-link">← Другие статьи журнала</a>
+        <a href="../index.html#schedule" class="back-link">Записаться на стретчинг →</a>
     </div>
-</div>
-
-<footer>© 2026 Bloom Fit. Все права защищены.</footer>
+</article>
 
 </body>
 </html>
