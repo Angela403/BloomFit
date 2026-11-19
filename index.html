@@ -183,12 +183,13 @@
         .faq-section { background: #fff; }
         .faq-wrapper { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
         .faq-item { background: var(--cream); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
-        .faq-item.active { border-color: var(--pink); }
+        /* ВАЖНО: используем .open вместо .active, чтобы не конфликтовать с .reveal.active */
+        .faq-item.open { border-color: var(--pink); }
         .faq-question { width: 100%; padding: 22px; text-align: left; background: none; border: none; font-family: 'Playfair Display', serif; font-size: clamp(16px, 2vw, 20px); color: var(--wine); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 15px; font-weight: 500; }
-        .faq-icon { font-size: 24px; color: var(--pink); flex-shrink: 0; }
-        .faq-item.active .faq-icon { transform: rotate(45deg); }
+        .faq-icon { font-size: 24px; color: var(--pink); flex-shrink: 0; transition: transform 0.3s ease; }
+        .faq-item.open .faq-icon { transform: rotate(45deg); }
         .faq-answer { max-height: 0; overflow: hidden; transition: 0.4s; font-size: clamp(14px, 1.5vw, 16px); padding: 0 22px; }
-        .faq-item.active .faq-answer { padding-bottom: 22px; max-height: 300px; }
+        .faq-item.open .faq-answer { padding-bottom: 22px; max-height: 300px; }
 
         .contacts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
         .contacts-info h2 { margin-bottom: 24px; font-size: clamp(28px, 4vw, 48px); }
@@ -932,7 +933,8 @@
                     hasPass = currentUser.passes.some(ps => ps.left > 0 && (ps.directions.includes('all') || ps.directions.includes(reqType)));
                 }
                 if (!currentUser) {
-                    btnHtml = `<button class="btn-schedule-book" onclick="openAuthModal()">Войти</button>`;
+                    // ВАЖНО: текст кнопки «Записаться» вместо «Войти», алгоритм тот же (открывает окно входа)
+                    btnHtml = `<button class="btn-schedule-book" onclick="openAuthModal()">Записаться</button>`;
                 } else if (!hasPass && !currentUser.useFreeNext) {
                     btnHtml = `<button class="btn-schedule-book" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">Купить</button>`;
                 } else {
@@ -1636,10 +1638,10 @@
         });
     });
 
-    // FAQ
+    // ===== FAQ: используем .open, чтобы не конфликтовать с .reveal.active =====
     document.querySelectorAll('.faq-question').forEach(btn => {
         btn.addEventListener('click', function() {
-            this.parentElement.classList.toggle('active');
+            this.parentElement.classList.toggle('open');
         });
     });
 
