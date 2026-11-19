@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
     <meta name="theme-color" content="#4A0E1C">
     <title>Bloom Fit – премиальная студия пилатеса</title>
     <script>if ('scrollRestoration' in history) history.scrollRestoration = 'manual';</script>
@@ -16,12 +16,34 @@
             --success: #2e7d32; --success-bg: #e8f5e9; --warning: #e65100; --warning-bg: #fff3e0;
             --danger: #c62828; --danger-bg: #fce4ec;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; overflow-wrap: break-word; word-wrap: break-word; }
         html { scroll-behavior: smooth; overflow-x: hidden; }
-        body { background: var(--cream); font-family: 'Montserrat', sans-serif; color: var(--brown); line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; width: 100%; }
-        h1, h2, h3, h4, h5, .logo, .section-title { font-family: 'Playfair Display', serif; color: var(--wine); font-weight: 500; }
+        body {
+            background: var(--cream);
+            font-family: 'Montserrat', sans-serif;
+            color: var(--brown);
+            line-height: 1.7;
+            font-size: 16px;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            width: 100%;
+        }
+        img { max-width: 100%; height: auto; display: block; }
+        h1, h2, h3, h4, h5, .logo, .section-title { font-family: 'Playfair Display', serif; color: var(--wine); font-weight: 500; line-height: 1.2; }
         a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
-        .container { max-width: 1300px; margin: 0 auto; padding: 0 24px; width: 100%; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 30px; width: 100%; }
+
+        /* ===== ПОЯВЛЕНИЕ ПРИ СКРОЛЛЕ ===== */
+        .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.9s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1); will-change: opacity, transform; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+        .reveal-delay-5 { transition-delay: 0.5s; }
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { opacity: 1; transform: none; transition: none; }
+        }
 
         .bg-dots { background-image: radial-gradient(var(--pink) 1.5px, transparent 1.5px); background-size: 30px 30px; }
         .lace-divider { height: 20px; background: radial-gradient(circle at 50% 0, transparent 12px, var(--cream) 13px); background-size: 40px 20px; background-repeat: repeat-x; background-color: var(--pink); margin-top: -1px; position: relative; z-index: 10; width: 100%; }
@@ -51,25 +73,25 @@
         .hero-label { font-size: 12px; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 20px; color: var(--pink); display: inline-block; border-bottom: 1px solid var(--pink); padding-bottom: 8px; }
         .hero-left h1 { font-size: clamp(36px, 6vw, 80px); line-height: 1.05; margin-bottom: 24px; color: var(--cream); text-wrap: balance; }
         .hero-left p { font-size: clamp(14px, 2vw, 18px); line-height: 1.7; margin-bottom: 30px; opacity: 0.9; }
-        .btn-main { background: var(--pink); color: var(--wine); padding: 16px 32px; border-radius: 50px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; border: none; cursor: pointer; font-size: 14px; text-align: center; display: inline-block; }
+        .btn-main { background: var(--pink); color: var(--wine); padding: 16px 32px; border-radius: 50px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; border: none; cursor: pointer; font-size: 14px; text-align: center; display: inline-block; font-family: 'Montserrat', sans-serif; }
         .btn-main:hover { background: var(--cream); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
         .hero-right { flex: 1; position: relative; background: var(--pink); display: flex; align-items: flex-end; justify-content: center; overflow: hidden; min-height: 400px; }
         .hero-right img { width: 85%; height: 90%; object-fit: cover; border-radius: 400px 400px 0 0; position: relative; z-index: 1; box-shadow: -20px 0 60px rgba(74, 14, 28, 0.2); }
 
-        section { padding: clamp(60px, 8vw, 100px) 0; }
-        .section-title { font-size: clamp(28px, 4vw, 56px); margin-bottom: 20px; line-height: 1.1; text-wrap: balance; }
+        section { padding: clamp(60px, 8vw, 100px) 0; overflow: hidden; }
+        .section-title { font-size: clamp(28px, 4vw, 56px); margin-bottom: 20px; }
         .section-subtitle { font-size: 13px; color: var(--brown); opacity: 0.8; font-style: italic; margin-bottom: 40px; display: block; }
 
         .about-grid { display: flex; align-items: center; gap: clamp(30px, 5vw, 60px); }
-        .about-text { flex: 1; min-width: 300px; }
+        .about-text { flex: 1; min-width: 0; }
         .about-text p { font-size: clamp(15px, 2vw, 18px); line-height: 1.8; margin-bottom: 24px; }
         .about-text .quote { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(18px, 2.5vw, 22px); color: var(--wine); border-left: 3px solid var(--pink); padding-left: 20px; margin-top: 30px; }
-        .about-img { flex: 1; min-width: 300px; height: clamp(300px, 40vw, 500px); border-radius: 300px 300px 0 0; overflow: hidden; box-shadow: 0 20px 40px rgba(74,14,28,0.1); position: relative; }
+        .about-img { flex: 1; min-width: 0; height: clamp(300px, 40vw, 500px); border-radius: 300px 300px 0 0; overflow: hidden; box-shadow: 0 20px 40px rgba(74,14,28,0.1); position: relative; }
         .about-img::after { content: ''; position: absolute; inset: 0; border: 10px solid rgba(227, 166, 184, 0.3); border-radius: 300px 300px 0 0; pointer-events: none; }
         .about-img img { width: 100%; height: 100%; object-fit: cover; }
 
-        .classes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .class-card { background: #fff; border-radius: 12px; border: 1px solid var(--border); display: flex; flex-direction: column; position: relative; overflow: hidden; }
+        .classes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .class-card { background: #fff; border-radius: 12px; border: 1px solid var(--border); display: flex; flex-direction: column; position: relative; overflow: hidden; transition: transform 0.4s ease, box-shadow 0.4s ease; }
         .class-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(74,14,28,0.08); border-color: var(--wine); }
         .class-card-img { width: 100%; height: 220px; object-fit: cover; }
         .class-card-content { padding: 24px; display: flex; flex-direction: column; flex-grow: 1; }
@@ -79,19 +101,19 @@
         .btn-book { background: var(--wine); color: var(--cream); padding: 12px 20px; border-radius: 50px; font-weight: 600; text-transform: uppercase; font-size: 12px; letter-spacing: 1px; display: inline-block; border: none; cursor: pointer; text-align: center; }
         .btn-book:hover { background: var(--pink); color: var(--wine); }
 
-        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; }
         .gallery-item { border-radius: 12px; overflow: hidden; cursor: pointer; position: relative; height: 250px; }
         .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
         .gallery-item:hover img { transform: scale(1.1); }
         .gallery-item::after { content: '🔍'; position: absolute; inset: 0; background: rgba(74,14,28,0.4); color: #fff; font-size: 32px; display: flex; align-items: center; justify-content: center; opacity: 0; transition: 0.3s; }
         .gallery-item:hover::after { opacity: 1; }
-        .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 3000; justify-content: center; align-items: center; }
-        .lightbox img { max-width: 90%; max-height: 90vh; border-radius: 12px; }
+        .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 3000; justify-content: center; align-items: center; padding: 20px; }
+        .lightbox img { max-width: 95%; max-height: 90vh; width: auto; height: auto; border-radius: 12px; }
         .lightbox.active { display: flex; }
 
         .loyalty-section { background: var(--pink-light); }
         .loyalty-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px; }
-        .loyalty-card { background: #fff; padding: clamp(20px, 4vw, 40px); border-radius: 12px; text-align: center; border: 1px solid var(--border); }
+        .loyalty-card { background: #fff; padding: clamp(24px, 4vw, 40px); border-radius: 12px; text-align: center; border: 1px solid var(--border); transition: transform 0.3s ease; }
         .loyalty-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(74,14,28,0.08); }
         .loyalty-icon { width: 60px; height: 60px; background: var(--pink-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; margin: 0 auto 20px; }
         .loyalty-card h4 { font-size: clamp(18px, 2.5vw, 22px); margin-bottom: 12px; }
@@ -100,18 +122,18 @@
         .info-icon:hover { transform: scale(1.2); color: var(--pink); }
 
         .schedule-search-wrap { margin-bottom: 24px; text-align: center; }
-        .schedule-search { width: 100%; max-width: 400px; padding: 14px 20px; border: 1px solid var(--border); border-radius: 50px; font-family: 'Montserrat', sans-serif; font-size: 14px; outline: none; }
+        .schedule-search { width: 100%; max-width: 400px; padding: 14px 20px; border: 1px solid var(--border); border-radius: 50px; font-family: 'Montserrat', sans-serif; font-size: 14px; outline: none; background: #fff; color: var(--brown); }
         .schedule-search:focus { border-color: var(--wine); box-shadow: 0 0 0 3px rgba(74,14,28,0.1); }
         .schedule-filters { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 40px; }
-        .schedule-filter { padding: 10px 20px; border-radius: 50px; border: 1px solid var(--wine); background: transparent; font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 600; color: var(--wine); cursor: pointer; }
+        .schedule-filter { padding: 10px 20px; border-radius: 50px; border: 1px solid var(--wine); background: transparent; font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 600; color: var(--wine); cursor: pointer; transition: 0.2s; }
         .schedule-filter.active, .schedule-filter:hover { background: var(--wine); color: var(--cream); }
         .schedule-table-wrapper { border: 1px solid var(--border); border-radius: 12px; overflow-x: auto; background: #fff; }
-        .schedule-table { width: 100%; border-collapse: collapse; min-width: 700px; }
-        .schedule-table th { padding: 20px; text-align: left; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--wine); background: var(--pink-light); border-bottom: 1px solid var(--border); white-space: nowrap; }
+        .schedule-table { width: 100%; border-collapse: collapse; min-width: 640px; }
+        .schedule-table th { padding: 18px 20px; text-align: left; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--wine); background: var(--pink-light); border-bottom: 1px solid var(--border); white-space: nowrap; }
         .schedule-table td { padding: 16px 20px; border-bottom: 1px solid var(--border); font-size: 14px; }
         .schedule-table tr:hover td { background: var(--cream); }
         .schedule-time { font-weight: 700; font-size: 15px; color: var(--wine); white-space: nowrap; }
-        .schedule-class { font-weight: 600; white-space: nowrap; }
+        .schedule-class { font-weight: 600; }
         .schedule-trainer { color: var(--brown); opacity: 0.8; }
         .schedule-spots { display: inline-block; padding: 6px 12px; border-radius: 50px; font-size: 11px; font-weight: 600; white-space: nowrap; }
         .spots-available { background: var(--success-bg); color: var(--success); }
@@ -124,26 +146,26 @@
 
         .pricing-section { background: var(--pink); }
         .pricing-carousel-wrapper { position: relative; padding: 20px 0; overflow: hidden; }
-        .pricing-carousel { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 24px; scrollbar-width: none; }
+        .pricing-carousel { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 24px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
         .pricing-carousel::-webkit-scrollbar { display: none; }
-        .pricing-card { flex: 0 0 320px; scroll-snap-align: center; background: var(--cream); padding: 35px 25px; border-radius: 12px; text-align: center; border: 1px solid var(--border); display: flex; flex-direction: column; }
+        .pricing-card { flex: 0 0 300px; scroll-snap-align: center; background: var(--cream); padding: 35px 25px; border-radius: 12px; text-align: center; border: 1px solid var(--border); display: flex; flex-direction: column; }
         .pricing-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(74,14,28,0.1); }
         .pricing-card h3 { font-size: clamp(18px, 2vw, 20px); margin-bottom: 8px; min-height: 48px; }
-        .pricing-price { font-size: clamp(32px, 4vw, 42px); font-weight: 600; color: var(--wine); font-family: 'Playfair Display', serif; margin-bottom: 20px; }
+        .pricing-price { font-size: clamp(28px, 4vw, 42px); font-weight: 600; color: var(--wine); font-family: 'Playfair Display', serif; margin-bottom: 20px; }
         .pricing-features { list-style: none; margin-bottom: 24px; text-align: left; flex-grow: 1; }
         .pricing-features li { padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 13px; display: flex; gap: 8px; }
         .pricing-features li::before { content: "✓"; color: var(--wine); font-weight: bold; }
-        .pricing-btn { display: block; width: 100%; padding: 14px; border-radius: 50px; background: var(--wine); color: var(--cream); font-weight: 600; text-transform: uppercase; font-size: 12px; border: none; cursor: pointer; }
+        .pricing-btn { display: block; width: 100%; padding: 14px; border-radius: 50px; background: var(--wine); color: var(--cream); font-weight: 600; text-transform: uppercase; font-size: 12px; border: none; cursor: pointer; font-family: 'Montserrat', sans-serif; }
         .pricing-btn:hover { background: var(--pink); color: var(--wine); }
 
-        .trainers-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+        .trainers-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; }
         .trainer-card { text-align: center; padding: 24px 16px; display: flex; flex-direction: column; align-items: center; }
         .trainer-img { width: 100%; height: 280px; border-radius: 140px 140px 0 0; overflow: hidden; margin-bottom: 20px; border: 4px solid #fff; box-shadow: 0 10px 20px rgba(74,14,28,0.1); }
         .trainer-img img { width: 100%; height: 100%; object-fit: cover; }
         .trainer-card h4 { font-size: clamp(18px, 2.5vw, 22px); margin-bottom: 4px; }
         .trainer-spec { font-size: 11px; text-transform: uppercase; color: var(--pink); font-weight: 700; letter-spacing: 1px; margin-bottom: 12px; }
 
-        .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+        .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
         .blog-card { background: #fff; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); display: flex; flex-direction: column; }
         .blog-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(74,14,28,0.08); }
         .blog-img { height: 200px; overflow: hidden; }
@@ -157,11 +179,11 @@
         .faq-wrapper { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
         .faq-item { background: var(--cream); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
         .faq-item.active { border-color: var(--pink); }
-        .faq-question { width: 100%; padding: 24px; text-align: left; background: none; border: none; font-family: 'Playfair Display', serif; font-size: clamp(16px, 2vw, 20px); color: var(--wine); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 15px; font-weight: 500; }
+        .faq-question { width: 100%; padding: 22px; text-align: left; background: none; border: none; font-family: 'Playfair Display', serif; font-size: clamp(16px, 2vw, 20px); color: var(--wine); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 15px; font-weight: 500; }
         .faq-icon { font-size: 24px; color: var(--pink); flex-shrink: 0; }
         .faq-item.active .faq-icon { transform: rotate(45deg); }
-        .faq-answer { max-height: 0; overflow: hidden; transition: 0.4s; font-size: clamp(14px, 1.5vw, 16px); padding: 0 24px; }
-        .faq-item.active .faq-answer { padding-bottom: 24px; max-height: 300px; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: 0.4s; font-size: clamp(14px, 1.5vw, 16px); padding: 0 22px; }
+        .faq-item.active .faq-answer { padding-bottom: 22px; max-height: 300px; }
 
         .contacts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
         .contacts-info h2 { margin-bottom: 24px; font-size: clamp(28px, 4vw, 48px); }
@@ -185,7 +207,7 @@
         .dash-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap; gap: 15px; }
         .dash-title { font-size: clamp(24px, 4vw, 42px); color: var(--wine); }
         .dash-header-actions { display: flex; gap: 10px; flex-wrap: wrap; }
-        .btn-back { background: transparent; border: 1px solid var(--wine); color: var(--wine); padding: 10px 20px; border-radius: 50px; font-weight: 600; cursor: pointer; font-size: 13px; }
+        .btn-back { background: transparent; border: 1px solid var(--wine); color: var(--wine); padding: 10px 20px; border-radius: 50px; font-weight: 600; cursor: pointer; font-size: 13px; font-family: 'Montserrat', sans-serif; }
         .btn-back:hover { background: var(--wine); color: var(--cream); }
         .btn-danger-outline { border-color: var(--danger); color: var(--danger); }
         .btn-danger-outline:hover { background: var(--danger); color: #fff; }
@@ -198,20 +220,20 @@
 
         .pass-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; position: relative; z-index: 2; }
         .pass-item { background: rgba(250, 245, 240, 0.1); border: 1px solid rgba(250, 245, 240, 0.2); padding: 16px; border-radius: 12px; text-align: left; }
-        .pass-item h4 { color: var(--pink); font-size: 14px; margin-bottom: 6px; display: flex; justify-content: space-between; }
+        .pass-item h4 { color: var(--pink); font-size: 14px; margin-bottom: 6px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 5px; }
         .pass-item .pass-progress { font-size: 20px; font-family: 'Playfair Display', serif; color: var(--cream); margin-top: 8px; }
         .pass-item .pass-progress span { font-size: 14px; font-family: 'Montserrat', sans-serif; opacity: 0.7; font-weight: 400; }
-        .btn-buy-pass { background: var(--pink); color: var(--wine); border: none; padding: 12px; width: 100%; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 13px; position: relative; z-index: 2; }
+        .btn-buy-pass { background: var(--pink); color: var(--wine); border: none; padding: 12px; width: 100%; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 13px; position: relative; z-index: 2; font-family: 'Montserrat', sans-serif; }
         .btn-buy-pass:hover { background: var(--cream); }
 
         .bonus-box { background: rgba(250, 245, 240, 0.1); border: 1px solid rgba(250, 245, 240, 0.2); padding: 20px; border-radius: 12px; margin-bottom: 20px; position: relative; z-index: 2; }
         .bonus-box h4 { color: var(--pink); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
         .bonus-box .bonus-val { font-size: 40px; font-family: 'Playfair Display', serif; color: var(--cream); line-height: 1; margin-bottom: 8px; }
         .bonus-box .bonus-desc { font-size: 11px; color: rgba(250,245,240,0.7); margin-bottom: 16px; }
-        .btn-referral { background: var(--pink); color: var(--wine); border: none; padding: 12px; width: 100%; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 13px; }
+        .btn-referral { background: var(--pink); color: var(--wine); border: none; padding: 12px; width: 100%; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 13px; font-family: 'Montserrat', sans-serif; }
         .btn-referral:hover { background: var(--cream); }
         .ref-count { display: block; margin-top: 12px; font-size: 12px; color: var(--pink); }
-        .btn-redeem { display: none; background: var(--pink); color: var(--wine); border: none; width: 100%; padding: 14px; border-radius: 8px; font-weight: 600; margin-bottom: 20px; cursor: pointer; position: relative; z-index: 2; font-size: 13px; }
+        .btn-redeem { display: none; background: var(--pink); color: var(--wine); border: none; width: 100%; padding: 14px; border-radius: 8px; font-weight: 600; margin-bottom: 20px; cursor: pointer; position: relative; z-index: 2; font-size: 13px; font-family: 'Montserrat', sans-serif; }
         .btn-redeem.active { display: block; }
         .btn-redeem:hover { background: var(--cream); }
 
@@ -225,13 +247,13 @@
         .b-info h4 { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--wine); margin-bottom: 4px; }
         .b-info p { font-size: 13px; }
         .b-badge { background: var(--wine); color: var(--pink); font-size: 10px; padding: 2px 8px; border-radius: 50px; font-family: 'Montserrat', sans-serif; font-weight: 600; margin-left: 8px; letter-spacing: 1px; }
-        .btn-cancel { background: transparent; border: 1px solid var(--danger); color: var(--danger); padding: 8px 16px; border-radius: 50px; font-size: 12px; font-weight: 600; cursor: pointer; }
+        .btn-cancel { background: transparent; border: 1px solid var(--danger); color: var(--danger); padding: 8px 16px; border-radius: 50px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: 'Montserrat', sans-serif; }
         .btn-cancel:hover { background: var(--danger); color: #fff; }
         .btn-cancel:disabled { border-color: #ccc; color: #999; cursor: not-allowed; background: transparent; }
         .empty-state { text-align: center; padding: 30px; opacity: 0.6; font-size: 14px; }
 
         .admin-nav { display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
-        .admin-tab { padding: 12px 24px; border-radius: 50px; border: 1px solid var(--wine); background: transparent; font-weight: 600; cursor: pointer; font-family: 'Montserrat', sans-serif; color: var(--wine); }
+        .admin-tab { padding: 12px 24px; border-radius: 50px; border: 1px solid var(--wine); background: transparent; font-weight: 600; cursor: pointer; font-family: 'Montserrat', sans-serif; color: var(--wine); font-size: 13px; }
         .admin-tab.active { background: var(--wine); color: var(--cream); }
         .admin-section { display: none; }
         .admin-section.active { display: block; }
@@ -239,15 +261,16 @@
         .admin-form h3 { margin-bottom: 20px; }
         .admin-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
         .admin-form label { display: block; font-size: 11px; font-weight: 700; text-transform: uppercase; margin-bottom: 6px; color: var(--wine); }
-        .admin-form input, .admin-form select { width: 100%; padding: 14px; border-radius: 8px; border: 1px solid var(--border); font-family: 'Montserrat', sans-serif; background: var(--cream); }
+        .admin-form input, .admin-form select { width: 100%; padding: 14px; border-radius: 8px; border: 1px solid var(--border); font-family: 'Montserrat', sans-serif; background: var(--cream); color: var(--brown); font-size: 14px; }
         .admin-form button { padding: 14px 24px; border-radius: 50px; background: var(--wine); color: #fff; border: none; font-weight: 600; cursor: pointer; font-family: 'Montserrat', sans-serif; }
         .admin-form button:hover { background: var(--pink); color: var(--wine); }
         .data-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; }
-        .data-table th, .data-table td { padding: 16px; text-align: left; border-bottom: 1px solid var(--border); font-size: 14px; }
+        .data-table th, .data-table td { padding: 14px 16px; text-align: left; border-bottom: 1px solid var(--border); font-size: 14px; }
         .data-table th { background: var(--pink-light); color: var(--wine); font-size: 12px; text-transform: uppercase; }
-        .btn-del { background: var(--danger-bg); color: var(--danger); border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 12px; }
+        .data-table-wrap { overflow-x: auto; border-radius: 12px; }
+        .btn-del { background: var(--danger-bg); color: var(--danger); border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 12px; font-family: 'Montserrat', sans-serif; }
         .btn-del:hover { background: var(--danger); color: #fff; }
-        .btn-edit { background: var(--pink-light); color: var(--wine); border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 12px; margin-right: 4px; }
+        .btn-edit { background: var(--pink-light); color: var(--wine); border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 12px; margin-right: 4px; font-family: 'Montserrat', sans-serif; }
         .btn-edit:hover { background: var(--pink); }
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px; }
         .stat-card { background: #fff; padding: 30px; border-radius: 20px; border: 1px solid var(--border); text-align: center; }
@@ -255,15 +278,15 @@
         .stat-label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--brown); }
 
         .chat-container { display: flex; flex-direction: column; gap: 16px; max-height: 500px; overflow-y: auto; padding: 20px; background: #fff; border-radius: 20px; border: 1px solid var(--border); }
-        .chat-msg { background: var(--cream); padding: 16px; border-radius: 12px; border-left: 4px solid var(--pink); width: 80%; }
+        .chat-msg { background: var(--cream); padding: 16px; border-radius: 12px; border-left: 4px solid var(--pink); width: 100%; max-width: 80%; }
         .chat-msg h5 { margin-bottom: 4px; font-size: 14px; color: var(--wine); }
         .chat-msg p { font-size: 14px; margin-bottom: 8px; }
         .chat-msg span { font-size: 11px; color: #999; display: block; text-align: right; }
 
-        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(74, 14, 28, 0.85); backdrop-filter: blur(8px); z-index: 2000; justify-content: center; align-items: center; padding: 20px; }
+        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(74, 14, 28, 0.85); backdrop-filter: blur(8px); z-index: 2000; justify-content: center; align-items: center; padding: 20px; overflow-y: auto; }
         .modal-overlay.active { display: flex; }
-        .modal-box { background: var(--cream); width: 100%; max-width: 480px; padding: clamp(24px, 5vw, 40px); border-radius: 20px; position: relative; max-height: 90vh; overflow-y: auto; box-shadow: 0 40px 100px rgba(0,0,0,0.3); }
-        .close-btn { position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 28px; color: var(--wine); cursor: pointer; }
+        .modal-box { background: var(--cream); width: 100%; max-width: 480px; padding: clamp(24px, 5vw, 40px); border-radius: 20px; position: relative; max-height: 90vh; overflow-y: auto; box-shadow: 0 40px 100px rgba(0,0,0,0.3); margin: auto; }
+        .close-btn { position: absolute; top: 15px; right: 15px; background: none; border: none; font-size: 28px; color: var(--wine); cursor: pointer; line-height: 1; }
         .close-btn:hover { transform: rotate(90deg); color: var(--pink); }
         .modal-box h2 { font-size: clamp(24px, 4vw, 32px); margin-bottom: 8px; }
         .modal-box > p { margin-bottom: 20px; font-size: 14px; }
@@ -292,6 +315,7 @@
             .footer-grid { grid-template-columns: 1fr 1fr; }
         }
         @media (max-width: 768px) {
+            .container { padding: 0 20px; }
             .header-inner { flex-direction: column; gap: 10px; }
             .header-right { width: 100%; justify-content: space-between; }
             .logo { font-size: 24px; }
@@ -299,14 +323,21 @@
             .footer-grid { grid-template-columns: 1fr; }
             .footer-bottom { flex-direction: column; text-align: center; }
             .btn-main, .btn-header { padding: 12px 24px; font-size: 12px; }
-            .schedule-filters { justify-content: flex-start; overflow-x: auto; }
+            .schedule-filters { justify-content: flex-start; overflow-x: auto; padding-bottom: 10px; flex-wrap: nowrap; }
             .schedule-filter { flex-shrink: 0; }
             .dash-header { flex-direction: column; align-items: flex-start; gap: 10px; }
             .dash-header-actions { width: 100%; }
-            .btn-back { flex: 1; }
+            .btn-back { flex: 1; text-align: center; }
             .booking-item { flex-direction: column; align-items: flex-start; }
             .btn-cancel { width: 100%; margin-top: 10px; }
             .admin-form-grid { grid-template-columns: 1fr; }
+            .chat-msg { max-width: 100%; }
+            .gallery-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+        }
+        @media (max-width: 480px) {
+            .hero-left h1 { font-size: 34px; }
+            .section-title { font-size: 26px; }
+            .pricing-card { flex: 0 0 90vw; }
         }
     </style>
 </head>
@@ -352,13 +383,13 @@
 
     <section id="about">
         <div class="container about-grid">
-            <div class="about-text">
+            <div class="about-text reveal">
                 <h2 class="section-title">Добро пожаловать в Bloom Fit</h2>
                 <p>Мы объединили эстетику премиального бутика с серьезным подходом к телу. Никакой суеты — только вы, коврик, и ваше идеальное движение.</p>
                 <p>Наши программы подходят для любого уровня подготовки. Мы верим, что движение должно приносить радость, а здоровье — быть естественным состоянием.</p>
                 <div class="quote">«Наша миссия — улучшать качество жизни через осознанное движение и бережный подход к телу».</div>
             </div>
-            <div class="about-img">
+            <div class="about-img reveal reveal-delay-2">
                 <img src="images/Интерьер студии Bloom Fit.jpg" alt="Интерьер" onerror="this.src='https://images.unsplash.com/photo-1574680096145-d05b474e2155?auto=format&fit=crop&w=800&q=80'">
             </div>
         </div>
@@ -366,53 +397,53 @@
 
     <section id="classes" style="background: var(--pink-light);">
         <div class="container">
-            <h2 class="section-title" style="text-align:center; margin-bottom:48px;">Наши направления</h2>
+            <h2 class="section-title reveal" style="text-align:center; margin-bottom:48px;">Наши направления</h2>
             <div class="classes-grid">
-                <div class="class-card"><img src="images/Reformer Pilates.jpg" class="class-card-img" onerror="this.src='https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=600&q=80'"><div class="class-card-content"><div class="class-meta">55 минут • Любой уровень</div><h3>Reformer Pilates</h3><p>Тренировки на профессиональном оборудовании Reformer.</p><a href="#schedule" class="btn-book">Записаться</a></div></div>
-                <div class="class-card"><img src="images/Mat Pilates.jpg" class="class-card-img" onerror="this.src='https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?auto=format&fit=crop&w=600&q=80'"><div class="class-card-content"><div class="class-meta">50 минут • Начинающий</div><h3>Mat Pilates</h3><p>Классический пилатес на мате. Работа с центром и дыханием.</p><a href="#schedule" class="btn-book">Записаться</a></div></div>
-                <div class="class-card"><img src="images/Стретчинг.jpg" class="class-card-img" onerror="this.src='https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=600&q=80'"><div class="class-card-content"><div class="class-meta">45 минут • Любой уровень</div><h3>Стретчинг</h3><p>Глубокое мягкое растяжение и снятие мышечных зажимов.</p><a href="#schedule" class="btn-book">Записаться</a></div></div>
-                <div class="class-card"><img src="images/Йога-релакс.jpg" class="class-card-img" onerror="this.src='https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=600&q=80'"><div class="class-card-content"><div class="class-meta">60 минут • Любой уровень</div><h3>Йога-релакс</h3><p>Мягкая медитативная практика с акцентом на дыхание.</p><a href="#schedule" class="btn-book">Записаться</a></div></div>
-                <div class="class-card"><img src="images/Функциональный тренинг.jpg" class="class-card-img" onerror="this.src='https://images.unsplash.com/photo-1518310383802-640c2de311b2?auto=format&fit=crop&w=600&q=80'"><div class="class-card-content"><div class="class-meta">50 минут • Средний</div><h3>Функциональный тренинг</h3><p>Развитие силы, координации и выносливости.</p><a href="#schedule" class="btn-book">Записаться</a></div></div>
-                <div class="class-card"><img src="images/Barre.jpg" class="class-card-img" style="object-position:center 20%;" onerror="this.src='https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=600&q=80'"><div class="class-card-content"><div class="class-meta">50 минут • Средний</div><h3>Barre</h3><p>Смесь балета, пилатеса и функционального тренинга.</p><a href="#schedule" class="btn-book">Записаться</a></div></div>
+                <div class="class-card reveal reveal-delay-1"><img src="images/Reformer Pilates.jpg" class="class-card-img" alt="Reformer" onerror="this.src='https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=600&q=80'"><div class="class-card-content"><div class="class-meta">55 минут • Любой уровень</div><h3>Reformer Pilates</h3><p>Тренировки на профессиональном оборудовании Reformer.</p><a href="#schedule" class="btn-book">Записаться</a></div></div>
+                <div class="class-card reveal reveal-delay-2"><img src="images/Mat Pilates.jpg" class="class-card-img" alt="Mat" onerror="this.src='https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?auto=format&fit=crop&w=600&q=80'"><div class="class-card-content"><div class="class-meta">50 минут • Начинающий</div><h3>Mat Pilates</h3><p>Классический пилатес на мате. Работа с центром и дыханием.</p><a href="#schedule" class="btn-book">Записаться</a></div></div>
+                <div class="class-card reveal reveal-delay-3"><img src="images/Стретчинг.jpg" class="class-card-img" alt="Стретчинг" onerror="this.src='https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=600&q=80'"><div class="class-card-content"><div class="class-meta">45 минут • Любой уровень</div><h3>Стретчинг</h3><p>Глубокое мягкое растяжение и снятие мышечных зажимов.</p><a href="#schedule" class="btn-book">Записаться</a></div></div>
+                <div class="class-card reveal reveal-delay-1"><img src="images/Йога-релакс.jpg" class="class-card-img" alt="Йога" onerror="this.src='https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=600&q=80'"><div class="class-card-content"><div class="class-meta">60 минут • Любой уровень</div><h3>Йога-релакс</h3><p>Мягкая медитативная практика с акцентом на дыхание.</p><a href="#schedule" class="btn-book">Записаться</a></div></div>
+                <div class="class-card reveal reveal-delay-2"><img src="images/Функциональный тренинг.jpg" class="class-card-img" alt="Функционал" onerror="this.src='https://images.unsplash.com/photo-1518310383802-640c2de311b2?auto=format&fit=crop&w=600&q=80'"><div class="class-card-content"><div class="class-meta">50 минут • Средний</div><h3>Функциональный тренинг</h3><p>Развитие силы, координации и выносливости.</p><a href="#schedule" class="btn-book">Записаться</a></div></div>
+                <div class="class-card reveal reveal-delay-3"><img src="images/Barre.jpg" class="class-card-img" alt="Barre" style="object-position:center 20%;" onerror="this.src='https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=600&q=80'"><div class="class-card-content"><div class="class-meta">50 минут • Средний</div><h3>Barre</h3><p>Смесь балета, пилатеса и функционального тренинга.</p><a href="#schedule" class="btn-book">Записаться</a></div></div>
             </div>
         </div>
     </section>
 
     <section id="gallery">
         <div class="container">
-            <h2 class="section-title" style="text-align:center; margin-bottom:48px;">Галерея студии</h2>
+            <h2 class="section-title reveal" style="text-align:center; margin-bottom:48px;">Галерея студии</h2>
             <div class="gallery-grid">
-                <div class="gallery-item" onclick="openLightbox('images/галерея1.jpg')"><img src="images/галерея1.jpg" alt="Фото 1"></div>
-                <div class="gallery-item" onclick="openLightbox('images/галерея2.jpg')"><img src="images/галерея2.jpg" alt="Фото 2"></div>
-                <div class="gallery-item" onclick="openLightbox('images/галерея3.jpg')"><img src="images/галерея3.jpg" alt="Фото 3"></div>
-                <div class="gallery-item" onclick="openLightbox('images/галерея4.jpg')"><img src="images/галерея4.jpg" alt="Фото 4"></div>
+                <div class="gallery-item reveal reveal-delay-1" onclick="openLightbox('images/галерея1.jpg')"><img src="images/галерея1.jpg" alt="Фото 1"></div>
+                <div class="gallery-item reveal reveal-delay-2" onclick="openLightbox('images/галерея2.jpg')"><img src="images/галерея2.jpg" alt="Фото 2"></div>
+                <div class="gallery-item reveal reveal-delay-3" onclick="openLightbox('images/галерея3.jpg')"><img src="images/галерея3.jpg" alt="Фото 3"></div>
+                <div class="gallery-item reveal reveal-delay-4" onclick="openLightbox('images/галерея4.jpg')"><img src="images/галерея4.jpg" alt="Фото 4"></div>
             </div>
         </div>
     </section>
 
     <section id="loyalty" class="loyalty-section bg-dots">
         <div class="container">
-            <h2 class="section-title" style="text-align:center;">Программа лояльности <span class="info-icon" onclick="openInfoModal()">ℹ️</span></h2>
+            <h2 class="section-title reveal" style="text-align:center;">Программа лояльности <span class="info-icon" onclick="openInfoModal()">ℹ️</span></h2>
             <div class="loyalty-grid">
-                <div class="loyalty-card"><div class="loyalty-icon">💪</div><h4>За тренировки</h4><p>Посещайте занятия и получайте <b>50 бонусов</b> за каждую тренировку.</p></div>
-                <div class="loyalty-card"><div class="loyalty-icon">🎁</div><h4>Бесплатное занятие</h4><p>Накопите <b>500 бонусов</b> и обменяйте их на бесплатное посещение.</p></div>
-                <div class="loyalty-card"><div class="loyalty-icon">👯‍♀️</div><h4>Приведи подругу</h4><p>Пригласите подругу, и вы <b>оба</b> получите по 100 бонусов!</p></div>
+                <div class="loyalty-card reveal reveal-delay-1"><div class="loyalty-icon">💪</div><h4>За тренировки</h4><p>Посещайте занятия и получайте <b>50 бонусов</b> за каждую тренировку.</p></div>
+                <div class="loyalty-card reveal reveal-delay-2"><div class="loyalty-icon">🎁</div><h4>Бесплатное занятие</h4><p>Накопите <b>500 бонусов</b> и обменяйте их на бесплатное посещение.</p></div>
+                <div class="loyalty-card reveal reveal-delay-3"><div class="loyalty-icon">👯‍♀️</div><h4>Приведи подругу</h4><p>Пригласите подругу, и вы <b>оба</b> получите по 100 бонусов!</p></div>
             </div>
         </div>
     </section>
 
     <section id="schedule">
         <div class="container">
-            <h2 class="section-title" style="text-align:center; margin-bottom:8px;">Расписание</h2>
-            <span class="section-subtitle" style="text-align:center; display:block; margin-bottom:24px;">* Расписание обновляется каждую неделю</span>
-            <div class="schedule-search-wrap">
+            <h2 class="section-title reveal" style="text-align:center; margin-bottom:8px;">Расписание</h2>
+            <span class="section-subtitle reveal" style="text-align:center; display:block; margin-bottom:24px;">* Расписание обновляется каждую неделю</span>
+            <div class="schedule-search-wrap reveal">
                 <input type="text" id="scheduleSearch" class="schedule-search" placeholder="Поиск по названию или тренеру..." oninput="filterSchedule()">
             </div>
-            <div id="freeModeBanner" style="display:none; background:var(--wine); color:var(--cream); padding:20px; border-radius:12px; margin-bottom:32px; text-align:center; align-items:center; justify-content:space-between; gap:16px;">
+            <div id="freeModeBanner" style="display:none; background:var(--wine); color:var(--cream); padding:20px; border-radius:12px; margin-bottom:32px; text-align:center; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;">
                 <span>🎁 Режим бесплатной тренировки активен! Следующая запись спишет 500 бонусов.</span>
                 <button onclick="cancelFreeMode()" style="background:var(--pink); color:var(--wine); border:none; padding:10px 20px; border-radius:50px; font-weight:600; cursor:pointer;">Отменить</button>
             </div>
-            <div class="schedule-filters">
+            <div class="schedule-filters reveal">
                 <button class="schedule-filter active" data-day="mon" onclick="switchDay('mon', this)">Пн</button>
                 <button class="schedule-filter" data-day="tue" onclick="switchDay('tue', this)">Вт</button>
                 <button class="schedule-filter" data-day="wed" onclick="switchDay('wed', this)">Ср</button>
@@ -421,7 +452,7 @@
                 <button class="schedule-filter" data-day="sat" onclick="switchDay('sat', this)">Сб</button>
                 <button class="schedule-filter" data-day="sun" onclick="switchDay('sun', this)">Вс</button>
             </div>
-            <div class="schedule-table-wrapper">
+            <div class="schedule-table-wrapper reveal">
                 <div class="schedule-day active" data-day="mon"><table class="schedule-table"><thead><tr><th>Время</th><th>Занятие</th><th>Тренер</th><th>Статус</th><th></th></tr></thead><tbody id="tbody-mon"></tbody></table></div>
                 <div class="schedule-day" data-day="tue"><table class="schedule-table"><thead><tr><th>Время</th><th>Занятие</th><th>Тренер</th><th>Статус</th><th></th></tr></thead><tbody id="tbody-tue"></tbody></table></div>
                 <div class="schedule-day" data-day="wed"><table class="schedule-table"><thead><tr><th>Время</th><th>Занятие</th><th>Тренер</th><th>Статус</th><th></th></tr></thead><tbody id="tbody-wed"></tbody></table></div>
@@ -435,8 +466,8 @@
 
     <section id="pricing" class="pricing-section">
         <div class="container">
-            <h2 class="section-title" style="text-align:center; margin-bottom:40px;">Абонементы</h2>
-            <div class="pricing-carousel-wrapper">
+            <h2 class="section-title reveal" style="text-align:center; margin-bottom:40px;">Абонементы</h2>
+            <div class="pricing-carousel-wrapper reveal">
                 <div class="pricing-carousel">
                     <div class="pricing-card"><h3>Разовое посещение</h3><div class="pricing-price">2 500 ₽</div><ul class="pricing-features"><li>Любое групповое занятие</li></ul><button class="pricing-btn" onclick="initPurchase('Разовое посещение','2 500 ₽',1,'single',['all'])">Купить</button></div>
                     <div class="pricing-card"><h3>Микс: Пилатес + Йога + Сила</h3><div class="pricing-price">12 000 ₽</div><ul class="pricing-features"><li>8 занятий (3 направления)</li></ul><button class="pricing-btn" onclick="initPurchase('Микс','12 000 ₽',8,'mix',['reformer','mat','stretch','yoga','func','barre'])">Купить</button></div>
@@ -450,43 +481,43 @@
 
     <section id="trainers">
         <div class="container">
-            <h2 class="section-title" style="text-align:center; margin-bottom:64px;">Наши эксперты</h2>
+            <h2 class="section-title reveal" style="text-align:center; margin-bottom:64px;">Наши эксперты</h2>
             <div class="trainers-grid">
-                <div class="trainer-card lace-frame"><div class="trainer-img"><img src="images/Анна.jpg" onerror="this.src='https://images.unsplash.com/photo-1594381898411-846e7d193883?auto=format&fit=crop&w=400&q=80'"></div><h4>Анна</h4><div class="trainer-spec">Reformer Pilates</div></div>
-                <div class="trainer-card lace-frame"><div class="trainer-img"><img src="images/Екатерина.jpg" onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80'"></div><h4>Екатерина</h4><div class="trainer-spec">Mat Pilates</div></div>
-                <div class="trainer-card lace-frame"><div class="trainer-img"><img src="images/Мария.jpg" onerror="this.src='https://images.unsplash.com/photo-1548690312-e3b507d8c110?auto=format&fit=crop&w=400&q=80'"></div><h4>Мария</h4><div class="trainer-spec">Стретчинг & Йога</div></div>
-                <div class="trainer-card lace-frame"><div class="trainer-img"><img src="images/Ольга.jpg" style="object-position:top;" onerror="this.src='https://images.unsplash.com/photo-1594381898411-846e7d193883?auto=format&fit=crop&w=400&q=80'"></div><h4>Ольга</h4><div class="trainer-spec">Barre</div></div>
-                <div class="trainer-card lace-frame"><div class="trainer-img"><img src="images/Ирина.jpg" onerror="this.src='https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=400&q=80'"></div><h4>Ирина</h4><div class="trainer-spec">Функциональный</div></div>
+                <div class="trainer-card lace-frame reveal reveal-delay-1"><div class="trainer-img"><img src="images/Анна.jpg" alt="Анна" onerror="this.src='https://images.unsplash.com/photo-1594381898411-846e7d193883?auto=format&fit=crop&w=400&q=80'"></div><h4>Анна</h4><div class="trainer-spec">Reformer Pilates</div></div>
+                <div class="trainer-card lace-frame reveal reveal-delay-2"><div class="trainer-img"><img src="images/Екатерина.jpg" alt="Екатерина" onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80'"></div><h4>Екатерина</h4><div class="trainer-spec">Mat Pilates</div></div>
+                <div class="trainer-card lace-frame reveal reveal-delay-3"><div class="trainer-img"><img src="images/Мария.jpg" alt="Мария" onerror="this.src='https://images.unsplash.com/photo-1548690312-e3b507d8c110?auto=format&fit=crop&w=400&q=80'"></div><h4>Мария</h4><div class="trainer-spec">Стретчинг & Йога</div></div>
+                <div class="trainer-card lace-frame reveal reveal-delay-1"><div class="trainer-img"><img src="images/Ольга.jpg" alt="Ольга" style="object-position:top;" onerror="this.src='https://images.unsplash.com/photo-1594381898411-846e7d193883?auto=format&fit=crop&w=400&q=80'"></div><h4>Ольга</h4><div class="trainer-spec">Barre</div></div>
+                <div class="trainer-card lace-frame reveal reveal-delay-2"><div class="trainer-img"><img src="images/Ирина.jpg" alt="Ирина" onerror="this.src='https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=400&q=80'"></div><h4>Ирина</h4><div class="trainer-spec">Функциональный</div></div>
             </div>
         </div>
     </section>
 
     <section id="blog" style="background: var(--pink-light);">
         <div class="container">
-            <h2 class="section-title" style="text-align:center; margin-bottom:64px;">Журнал</h2>
+            <h2 class="section-title reveal" style="text-align:center; margin-bottom:64px;">Журнал</h2>
             <div class="blog-grid">
-                <a href="./stat/article1.html" class="blog-card"><div class="blog-img"><img src="images/пилатес осанка1статья.jpg" alt="Пилатес"></div><div class="blog-content"><div class="blog-date">15 мая 2026</div><h4>Как пилатес влияет на осанку?</h4><span class="blog-link">Читать далее</span></div></a>
-                <a href="./stat/article2.html" class="blog-card"><div class="blog-img"><img src="images/питание до и после статья2.jpg" alt="Питание"></div><div class="blog-content"><div class="blog-date">10 мая 2026</div><h4>Питание до и после тренировки</h4><span class="blog-link">Читать далее</span></div></a>
-                <a href="./stat/article3.html" class="blog-card"><div class="blog-img"><img src="images/стретчинг статья3.jpg" alt="Стретчинг"></div><div class="blog-content"><div class="blog-date">5 мая 2026</div><h4>Стретчинг: польза или миф?</h4><span class="blog-link">Читать далее</span></div></a>
+                <a href="./stat/article1.html" class="blog-card reveal reveal-delay-1"><div class="blog-img"><img src="images/пилатес осанка1статья.jpg" alt="Пилатес"></div><div class="blog-content"><div class="blog-date">15 мая 2026</div><h4>Как пилатес влияет на осанку?</h4><span class="blog-link">Читать далее</span></div></a>
+                <a href="./stat/article2.html" class="blog-card reveal reveal-delay-2"><div class="blog-img"><img src="images/питание до и после статья2.jpg" alt="Питание"></div><div class="blog-content"><div class="blog-date">10 мая 2026</div><h4>Питание до и после тренировки</h4><span class="blog-link">Читать далее</span></div></a>
+                <a href="./stat/article3.html" class="blog-card reveal reveal-delay-3"><div class="blog-img"><img src="images/стретчинг статья3.jpg" alt="Стретчинг"></div><div class="blog-content"><div class="blog-date">5 мая 2026</div><h4>Стретчинг: польза или миф?</h4><span class="blog-link">Читать далее</span></div></a>
             </div>
         </div>
     </section>
 
     <section class="faq-section">
         <div class="container">
-            <h2 class="section-title" style="text-align:center; margin-bottom:48px;">Частые вопросы</h2>
+            <h2 class="section-title reveal" style="text-align:center; margin-bottom:48px;">Частые вопросы</h2>
             <div class="faq-wrapper">
-                <div class="faq-item"><button class="faq-question">Нужна ли специальная подготовка? <span class="faq-icon">+</span></button><div class="faq-answer"><p>Нет, большинство программ адаптированы для любого уровня.</p></div></div>
-                <div class="faq-item"><button class="faq-question">Что взять с собой? <span class="faq-icon">+</span></button><div class="faq-answer"><p>Удобную спортивную форму, носки и воду.</p></div></div>
-                <div class="faq-item"><button class="faq-question">Как работает программа лояльности? <span class="faq-icon">+</span></button><div class="faq-answer"><p>За каждую тренировку начисляется 50 бонусов. Накопив 500 бонусов, вы можете обменять их на бесплатное занятие в личном кабинете.</p></div></div>
-                <div class="faq-item"><button class="faq-question">Какие правила отмены записи? <span class="faq-icon">+</span></button><div class="faq-answer"><p>Отменить запись можно не позднее чем за 6 часов до начала тренировки.</p></div></div>
+                <div class="faq-item reveal reveal-delay-1"><button class="faq-question">Нужна ли специальная подготовка? <span class="faq-icon">+</span></button><div class="faq-answer"><p>Нет, большинство программ адаптированы для любого уровня.</p></div></div>
+                <div class="faq-item reveal reveal-delay-2"><button class="faq-question">Что взять с собой? <span class="faq-icon">+</span></button><div class="faq-answer"><p>Удобную спортивную форму, носки и воду.</p></div></div>
+                <div class="faq-item reveal reveal-delay-3"><button class="faq-question">Как работает программа лояльности? <span class="faq-icon">+</span></button><div class="faq-answer"><p>За каждую тренировку начисляется 50 бонусов. Накопив 500 бонусов, вы можете обменять их на бесплатное занятие в личном кабинете.</p></div></div>
+                <div class="faq-item reveal reveal-delay-4"><button class="faq-question">Какие правила отмены записи? <span class="faq-icon">+</span></button><div class="faq-answer"><p>Отменить запись можно не позднее чем за 6 часов до начала тренировки.</p></div></div>
             </div>
         </div>
     </section>
 
     <section id="contacts" style="background: var(--pink-light);">
         <div class="container contacts-grid">
-            <div class="contacts-info">
+            <div class="contacts-info reveal">
                 <h2 class="section-title">Свяжитесь с нами</h2>
                 <p><strong>Адрес</strong> г. Москва, ул. Тверская, д. 12</p>
                 <p><strong>Телефон</strong> +7 (999) 123-45-67</p>
@@ -494,7 +525,7 @@
                 <p><strong>Режим работы</strong> Ежедневно с 08:00 до 22:00</p>
                 <div style="margin-top:32px;"><button class="btn-main" onclick="openModalForm()" style="width:100%;">Оставить заявку</button></div>
             </div>
-            <a href="https://yandex.ru/maps/?text=Москва,+улица+Тверская,+12" target="_blank" class="map-container">
+            <a href="https://yandex.ru/maps/?text=Москва,+улица+Тверская,+12" target="_blank" class="map-container reveal reveal-delay-2">
                 <img src="images/Карта.jpg" alt="Карта" onerror="this.src='https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=800&q=80'">
                 <div class="map-overlay"><span>Открыть в Яндекс.Картах</span></div>
             </a>
@@ -519,7 +550,7 @@
         <div class="dash-header">
             <h1 class="dash-title">Личный кабинет</h1>
             <div class="dash-header-actions">
-                <button class="btn-back" onclick="closeDashboard()">← Вернуться на главную</button>
+                <button class="btn-back" onclick="closeDashboard()">← На главную</button>
                 <button class="btn-back btn-danger-outline" onclick="logout()">Выйти</button>
             </div>
         </div>
@@ -556,15 +587,15 @@
         <div class="dash-header">
             <h1 class="dash-title">Панель администратора</h1>
             <div class="dash-header-actions">
-                <button class="btn-back" onclick="closeAdminPanel()">← Вернуться на главную</button>
-                <button class="btn-back btn-danger-outline" onclick="logout()">Выйти из аккаунта</button>
+                <button class="btn-back" onclick="closeAdminPanel()">← На главную</button>
+                <button class="btn-back btn-danger-outline" onclick="logout()">Выйти</button>
             </div>
         </div>
 
         <div class="admin-nav">
             <button class="admin-tab active" onclick="switchAdminTab('admin-schedule', this)">Расписание</button>
             <button class="admin-tab" onclick="switchAdminTab('admin-clients', this)">Клиенты</button>
-            <button class="admin-tab" onclick="switchAdminTab('admin-messages', this)">Сообщения (CRM)</button>
+            <button class="admin-tab" onclick="switchAdminTab('admin-messages', this)">Сообщения</button>
             <button class="admin-tab" onclick="switchAdminTab('admin-stats', this)">Статистика</button>
         </div>
 
@@ -585,10 +616,12 @@
                 <button onclick="addNewClass()">Добавить занятие</button>
             </div>
             <h3 style="margin-bottom:16px;">Текущее расписание</h3>
-            <table class="data-table" id="adminScheduleTable">
-                <thead><tr><th>День</th><th>Время</th><th>Занятие</th><th>Тренер</th><th>Записано</th><th>Действия</th></tr></thead>
-                <tbody></tbody>
-            </table>
+            <div class="data-table-wrap">
+                <table class="data-table" id="adminScheduleTable">
+                    <thead><tr><th>День</th><th>Время</th><th>Занятие</th><th>Тренер</th><th>Записано</th><th>Действия</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
         </div>
 
         <div id="admin-clients" class="admin-section">
@@ -603,14 +636,16 @@
                 <button onclick="createClient()">Создать аккаунт</button>
             </div>
             <h3 style="margin-bottom:16px;">База клиентов</h3>
-            <table class="data-table" id="adminClientsTable">
-                <thead><tr><th>Имя</th><th>Email</th><th>Бонусы</th><th>Абонементы</th><th>Действия</th></tr></thead>
-                <tbody></tbody>
-            </table>
+            <div class="data-table-wrap">
+                <table class="data-table" id="adminClientsTable">
+                    <thead><tr><th>Имя</th><th>Email</th><th>Бонусы</th><th>Абонементы</th><th>Действия</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
         </div>
 
         <div id="admin-messages" class="admin-section">
-            <h3 style="margin-bottom:16px;">Входящие заявки (CRM)</h3>
+            <h3 style="margin-bottom:16px;">Входящие заявки</h3>
             <div class="chat-container" id="adminChat"></div>
         </div>
 
@@ -622,10 +657,12 @@
                 <div class="stat-card"><div class="stat-val" id="statActivePasses">0</div><div class="stat-label">Активных абонементов</div></div>
             </div>
             <h3 style="margin: 30px 0 16px;">Популярность направлений</h3>
-            <table class="data-table" id="adminStatsTable">
-                <thead><tr><th>Направление</th><th>Записей</th><th>Заполненность</th></tr></thead>
-                <tbody></tbody>
-            </table>
+            <div class="data-table-wrap">
+                <table class="data-table" id="adminStatsTable">
+                    <thead><tr><th>Направление</th><th>Записей</th><th>Заполненность</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
@@ -650,9 +687,9 @@
         <form id="paymentForm">
             <div class="form-group"><label>Имя владельца карты</label><input type="text" required placeholder="IVAN IVANOV"></div>
             <div class="form-group"><label>Номер карты</label><input type="text" required placeholder="0000 0000 0000 0000" maxlength="19" oninput="formatCardNumber(this)"></div>
-            <div style="display:flex; gap:16px;">
-                <div class="form-group" style="flex:1;"><label>Срок</label><input type="text" required placeholder="MM/YY" maxlength="5" oninput="formatExpiry(this)"></div>
-                <div class="form-group" style="flex:1;"><label>CVV</label><input type="password" required placeholder="***" maxlength="3"></div>
+            <div style="display:flex; gap:16px; flex-wrap:wrap;">
+                <div class="form-group" style="flex:1; min-width:120px;"><label>Срок</label><input type="text" required placeholder="MM/YY" maxlength="5" oninput="formatExpiry(this)"></div>
+                <div class="form-group" style="flex:1; min-width:120px;"><label>CVV</label><input type="password" required placeholder="***" maxlength="3"></div>
             </div>
             <button type="submit" class="btn-main" style="width:100%; margin-top:12px;">Оплатить</button>
             <p style="text-align:center; font-size:12px; margin-top:16px; opacity:0.6;">Это демо-режим. Реальные деньги не списываются.</p>
@@ -1308,317 +1345,4 @@
         user.referralsCount = (user.referralsCount || 0) + 1;
         user.bonus = (user.bonus || 0) + 100;
         setCurrentUser(user);
-        const users = getUsers();
-        const idx = users.findIndex(u => u.email === user.email);
-        if (idx !== -1) { users[idx] = user; saveUsers(users); }
-        alert('Реферальная ссылка скопирована! +100 бонусов начислено (демо).');
-        renderDashboard();
-    }
-
-    function openEditProfile() {
-        const user = getCurrentUser();
-        if (!user) return;
-        document.getElementById('editName').value = user.name || '';
-        document.getElementById('editPhone').value = user.phone || '';
-        document.getElementById('editEmail').value = user.email || '';
-        document.getElementById('editPass').value = '';
-        document.getElementById('modalEditProfile').classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-
-    document.getElementById('editProfileForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const user = getCurrentUser();
-        if (!user) return;
-
-        const oldEmail = user.email;
-        const newName = document.getElementById('editName').value.trim();
-        const newPhone = document.getElementById('editPhone').value.trim();
-        const newEmail = document.getElementById('editEmail').value.trim();
-        const newPass = document.getElementById('editPass').value;
-
-        if (!newName) { alert('Имя не может быть пустым'); return; }
-        if (newPass && newPass.length < 6) { alert('Пароль должен быть минимум 6 символов'); return; }
-        if (newEmail !== oldEmail && getUsers().find(u => u.email === newEmail)) { alert('Email уже занят'); return; }
-
-        const users = getUsers();
-        const idx = users.findIndex(u => u.email === oldEmail);
-
-        user.name = newName;
-        user.phone = newPhone;
-        user.email = newEmail;
-        if (newPass) user.pass = newPass;
-
-        if (idx !== -1) { users[idx] = user; saveUsers(users); }
-        setCurrentUser(user);
-        closeModal('modalEditProfile');
-        renderDashboard();
-        updateAuthUI();
-        alert('Профиль обновлён');
-    });
-
-    function openAdminPanel() {
-        document.getElementById('main-site').style.display = 'none';
-        document.getElementById('dashboard-page').style.display = 'none';
-        document.getElementById('admin-page').style.display = 'block';
-        window.scrollTo(0, 0);
-        renderAdminSchedule();
-        renderAdminClients();
-        renderAdminChat();
-        renderAdminStats();
-    }
-    function closeAdminPanel() {
-        document.getElementById('admin-page').style.display = 'none';
-        document.getElementById('main-site').style.display = 'block';
-        window.scrollTo(0, 0);
-        renderSchedule();
-    }
-    function switchAdminTab(id, btn) {
-        document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
-        btn.classList.add('active');
-        document.getElementById(id).classList.add('active');
-    }
-    function renderAdminSchedule() {
-        const schedule = getSchedule();
-        const tbody = document.querySelector('#adminScheduleTable tbody');
-        tbody.innerHTML = '';
-        const daysMap = { mon: 'Пн', tue: 'Вт', wed: 'Ср', thu: 'Чт', fri: 'Пт', sat: 'Сб', sun: 'Вс' };
-        schedule.sort((a, b) => {
-            const da = ['mon','tue','wed','thu','fri','sat','sun'].indexOf(a.day) - ['mon','tue','wed','thu','fri','sat','sun'].indexOf(b.day);
-            if (da !== 0) return da;
-            return a.time.localeCompare(b.time);
-        });
-        schedule.forEach(item => {
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td>${daysMap[item.day]}</td>
-                <td>${item.time}</td>
-                <td>${item.className}</td>
-                <td>${item.trainer}</td>
-                <td>${item.participants}/10</td>
-                <td>
-                    <button class="btn-edit" onclick="editClass('${item.id}')">✏️</button>
-                    <button class="btn-del" onclick="deleteClass('${item.id}')">Удалить</button>
-                </td>
-            `;
-            tbody.appendChild(tr);
-        });
-    }
-    function addNewClass() {
-        const day = document.getElementById('adminDay').value;
-        const time = document.getElementById('adminTime').value;
-        const className = document.getElementById('adminClass').value.trim();
-        const trainer = document.getElementById('adminTrainer').value.trim();
-        if (!time || !className || !trainer) { alert('Заполните все поля!'); return; }
-        const schedule = getSchedule();
-        const newId = `${day}-${time.replace(':', '')}`;
-        if (schedule.find(s => s.id === newId)) { alert('Занятие на это время уже существует!'); return; }
-        schedule.push({ id: newId, day, time, className, trainer, participants: 0 });
-        saveSchedule(schedule);
-        alert('Занятие успешно добавлено!');
-        document.getElementById('adminTime').value = '';
-        document.getElementById('adminClass').value = '';
-        document.getElementById('adminTrainer').value = '';
-        renderAdminSchedule();
-        renderAdminStats();
-    }
-    function editClass(id) {
-        const schedule = getSchedule();
-        const item = schedule.find(s => s.id === id);
-        if (!item) return;
-        const newClass = prompt('Название занятия:', item.className);
-        if (newClass === null) return;
-        const newTrainer = prompt('Тренер:', item.trainer);
-        if (newTrainer === null) return;
-        const newTime = prompt('Время (ЧЧ:ММ):', item.time);
-        if (newTime === null) return;
-        if (!/^\d{2}:\d{2}$/.test(newTime)) { alert('Неверный формат времени (нужно ЧЧ:ММ)'); return; }
-
-        item.className = newClass.trim() || item.className;
-        item.trainer = newTrainer.trim() || item.trainer;
-        if (newTime !== item.time) {
-            item.time = newTime;
-            item.id = `${item.day}-${newTime.replace(':', '')}`;
-        }
-        saveSchedule(schedule);
-        renderAdminSchedule();
-        alert('Занятие обновлено');
-    }
-    function deleteClass(id) {
-        if (!confirm('Удалить это занятие?')) return;
-        let schedule = getSchedule();
-        schedule = schedule.filter(s => s.id !== id);
-        saveSchedule(schedule);
-        renderAdminSchedule();
-        renderAdminStats();
-    }
-    function createClient() {
-        const name = document.getElementById('newClientName').value.trim();
-        const phone = document.getElementById('newClientPhone').value.trim();
-        const email = document.getElementById('newClientEmail').value.trim();
-        const pass = document.getElementById('newClientPass').value;
-        if (!name || !email || !pass) { alert('Заполните имя, email и пароль!'); return; }
-        const users = getUsers();
-        if (users.find(u => u.email === email)) { alert('Клиент с таким email уже есть!'); return; }
-        users.push({ name, phone, email, pass, bonus: 0, bookings: [], passes: [], notifications: [], referralsCount: 0, useFreeNext: false });
-        saveUsers(users);
-        alert('Клиент создан!');
-        document.getElementById('newClientName').value = '';
-        document.getElementById('newClientPhone').value = '';
-        document.getElementById('newClientEmail').value = '';
-        document.getElementById('newClientPass').value = '';
-        renderAdminClients();
-        renderAdminStats();
-    }
-    function renderAdminClients() {
-        const users = getUsers();
-        const tbody = document.querySelector('#adminClientsTable tbody');
-        tbody.innerHTML = '';
-        users.forEach(u => {
-            if (u.email === 'admin@bloomfit.ru') return;
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td>${u.name}${u.blocked ? ' <span style="color:var(--danger);font-size:11px;">(заблокирован)</span>' : ''}</td>
-                <td>${u.email}</td>
-                <td>${u.bonus || 0}</td>
-                <td>${u.passes ? u.passes.length : 0} шт.</td>
-                <td>
-                    <button class="btn-edit" onclick="toggleBlockClient('${u.email}')">${u.blocked ? 'Разблокировать' : 'Заблокировать'}</button>
-                    <button class="btn-del" onclick="deleteClient('${u.email}')">Удалить</button>
-                </td>
-            `;
-            tbody.appendChild(tr);
-        });
-    }
-    function toggleBlockClient(email) {
-        const users = getUsers();
-        const user = users.find(u => u.email === email);
-        if (!user) return;
-        user.blocked = !user.blocked;
-        saveUsers(users);
-        renderAdminClients();
-    }
-    function deleteClient(email) {
-        if (!confirm('Удалить клиента? Действие необратимо.')) return;
-        let users = getUsers();
-        users = users.filter(u => u.email !== email);
-        saveUsers(users);
-        renderAdminClients();
-        renderAdminStats();
-    }
-    function renderAdminChat() {
-        const msgs = JSON.parse(localStorage.getItem(MESSAGES_KEY)) || [];
-        const chat = document.getElementById('adminChat');
-        chat.innerHTML = '';
-        if (msgs.length === 0) {
-            chat.innerHTML = '<div class="empty-state">Пока нет входящих сообщений.</div>';
-            return;
-        }
-        msgs.forEach(m => {
-            const div = document.createElement('div');
-            div.className = 'chat-msg';
-            div.innerHTML = `<h5>${m.name} (${m.phone})</h5><p>${m.text}</p><span>${m.date}</span>`;
-            chat.appendChild(div);
-        });
-    }
-    function renderAdminStats() {
-        const schedule = getSchedule();
-        const users = getUsers().filter(u => u.email !== 'admin@bloomfit.ru');
-
-        const totalBookings = schedule.reduce((sum, s) => sum + s.participants, 0);
-        document.getElementById('statTotalBookings').innerText = totalBookings;
-        document.getElementById('statClients').innerText = users.length;
-
-        const activePasses = users.reduce((sum, u) => sum + (u.passes || []).filter(p => p.left > 0).length, 0);
-        document.getElementById('statActivePasses').innerText = activePasses;
-
-        const byType = {};
-        schedule.forEach(s => {
-            const t = getClassType(s.className);
-            if (!byType[t]) byType[t] = { name: s.className, count: 0, slots: 0 };
-            byType[t].count += s.participants;
-            byType[t].slots += MAX_PARTICIPANTS;
-        });
-
-        const tbody = document.querySelector('#adminStatsTable tbody');
-        tbody.innerHTML = '';
-        Object.values(byType).sort((a, b) => b.count - a.count).forEach(r => {
-            const pct = r.slots > 0 ? Math.round((r.count / r.slots) * 100) : 0;
-            const tr = document.createElement('tr');
-            tr.innerHTML = `<td>${r.name}</td><td>${r.count}</td><td>${pct}%</td>`;
-            tbody.appendChild(tr);
-        });
-    }
-
-    function openModalForm() {
-        document.getElementById('modalForm').classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const name = document.getElementById('feedbackName').value;
-        const phone = document.getElementById('feedbackPhone').value;
-        const text = document.getElementById('feedbackMessage').value;
-        const msgs = JSON.parse(localStorage.getItem(MESSAGES_KEY)) || [];
-        msgs.unshift({ name, phone, text, date: new Date().toLocaleString() });
-        localStorage.setItem(MESSAGES_KEY, JSON.stringify(msgs));
-        alert('Спасибо! Ваше сообщение отправлено администратору.');
-        closeModal('modalForm');
-        this.reset();
-    });
-
-    function openInfoModal() {
-        document.getElementById('modalInfo').classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-    function openNotifModal() {
-        const user = getCurrentUser();
-        if (!user) return;
-        const list = document.getElementById('notifList');
-        list.innerHTML = '';
-        const notifs = user.notifications || [];
-        if (notifs.length === 0) {
-            list.innerHTML = '<div class="empty-state">Пока нет уведомлений</div>';
-        } else {
-            notifs.forEach(n => {
-                const div = document.createElement('div');
-                div.className = 'chat-msg';
-                div.innerHTML = `<p>${n.text}</p><span>${n.date}</span>`;
-                list.appendChild(div);
-            });
-        }
-        user.notifications = notifs.map(n => ({ ...n, read: true }));
-        setCurrentUser(user);
-        const users = getUsers();
-        const idx = users.findIndex(u => u.email === user.email);
-        if (idx !== -1) { users[idx] = user; saveUsers(users); }
-        updateAuthUI();
-        document.getElementById('modalNotifications').classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-
-    function openLightbox(url) {
-        document.getElementById('lightboxImg').src = url;
-        document.getElementById('lightbox').classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-    function closeLightbox() {
-        document.getElementById('lightbox').classList.remove('active');
-        document.body.style.overflow = '';
-    }
-
-    document.querySelectorAll('.faq-question').forEach(btn => {
-        btn.addEventListener('click', () => {
-            btn.parentElement.classList.toggle('active');
-        });
-    });
-
-    document.addEventListener('DOMContentLoaded', () => {
-        initData();
-        updateAuthUI();
-        renderSchedule();
-    });
-</script>
-</body>
-</html>
+        const users = get
